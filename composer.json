@@ -1,0 +1,62 @@
+{
+    "name": "detailnet/denner-webservice-client",
+    "description": "API client for Denner",
+    "type": "library",
+    "keywords": [
+        "Denner Shop Webservice Rest"
+    ],
+    "homepage": "https://denner-articles.detailnet.ch/api/articles",
+    "repositories" : [
+        {
+            "type":"vcs",
+            "url":"git@bitbucket.org:detailnet/denner-common.git"
+        }
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mirko Eberlein",
+            "email": "mirko.eberlein@webgate.biz"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "~5.0",
+        "guzzlehttp/guzzle-services": "0.5.0",
+        "detailnet/denner-common":"dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.6",
+        "squizlabs/php_codesniffer" : "~2.3",
+        "phpmd/phpmd": "~2.2",
+        "satooshi/php-coveralls": "dev-master"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Lwi\\Client\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "LwiTest\\Client\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "archive": {
+        "exclude": [
+            "!vendor",
+            "tests",
+            "*phpunit.xml",
+            ".coveralls.yml",
+            ".travis.yml",
+            "build.xml",
+            "build.properties",
+            "composer.phar"
+        ]
+    }
+}
