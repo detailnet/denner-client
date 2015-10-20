@@ -5,15 +5,14 @@ return array(
     'operations'  => array(
         'listArticle' => array(
             'httpMethod'       => 'GET',
-            'uri'              => '',
+            'uri'              => 'articles',
             'summary'          => 'List assets',
-            'parameters'       => array(
-            ),
-            'responseClass' => Array(),
+            'parameters'       => array(),
+            'responseClass' =>"asList",
         ),
         'oneArticle' => array(
             'httpMethod'       => 'GET',
-            'uri'              => '{article_id}/',
+            'uri'              => 'articles/{article_id}/',
             'summary'          => 'Fetch an asset',
             'parameters'       => array(
                 'article_nr' => array(
@@ -23,11 +22,11 @@ return array(
                     'required'    => true,
                 ),
             ),
-            'responseClass' => 'Article',
+            'responseClass' =>  Array(),
         ),
         'oneArticleTextBlocks' => array(
             'httpMethod'       => 'GET',
-            'uri'              => '{article_id}/text-blocks',
+            'uri'              => 'articles/{article_id}/text-blocks',
             'summary'          => 'List asset-types',
             'parameters'       => array(
                 'article_nr' => array(
@@ -37,7 +36,14 @@ return array(
                     'required'    => true,
                 ),
             ),
-            'responseClass' => Array(),
+            'responseClass' =>  Array(),
         )
     ),
+    'models' => array(
+        'asList' => array(
+            'properties' => array(
+                "articles" => ServiceArticle
+            )
+
+    )
 );

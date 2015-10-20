@@ -7,8 +7,11 @@
  */
 
 use Denner\Client\Article\WebServiceClient;
+
 $config = require 'bootstrap.php';
 $params = array();
 $client = WebServiceClient::factory($config);
+echo 1;
 $response = $client->listArticle($params);
+echo 2;
 var_dump($response);
