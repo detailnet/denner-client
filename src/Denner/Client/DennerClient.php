@@ -15,7 +15,7 @@ use Denner\Client\Subscriber;
 
 abstract class DennerClient extends ServiceClient
 {
-    const CLIENT_VERSION = '0.1.0';
+    const CLIENT_VERSION = '1.0.0';
 
     public static function factory($options = array())
     {
@@ -110,9 +110,9 @@ abstract class DennerClient extends ServiceClient
      */
     protected static function getDefaultServiceUrl()
     {
-        $serviceName = self::getServiceName();
+        $versionParts = explode('.', self::CLIENT_VERSION);
 
-        return sprintf('https://denner-%s.detailnet.ch/api/', $serviceName);
+        return sprintf('https://denner-api.detailnet.ch/v%s/', reset($versionParts));
     }
 
     /**
