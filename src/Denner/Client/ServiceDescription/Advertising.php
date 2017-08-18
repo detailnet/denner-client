@@ -67,20 +67,6 @@ return array(
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
         ),
-        'fetchPrintPublicationArticles' => array(
-            'httpMethod' => 'GET',
-            'uri' => 'print-publications/{print_publication_id}/articles',
-            'summary' => 'Fetch a print publication',
-            'parameters' => array(
-                'print_publication_id' => array(
-                    'description' => 'The ID of the print publication to fetch',
-                    'location' => 'uri',
-                    'type' => 'string',
-                    'required' => true,
-                ),
-            ),
-            'responseClass' => Response\ResourceResponse::CLASS,
-        ),
         'listPrintPublicationArticles' => array(
             'httpMethod' => 'GET',
             'uri' => 'print-publications/{print_publication_id}/articles',
