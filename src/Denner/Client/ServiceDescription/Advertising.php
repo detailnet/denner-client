@@ -5,6 +5,27 @@ use Denner\Client\Response;
 return array(
     'name' => 'Denner Advertising Service',
     'operations' => array(
+        'listPrintPublicationLinks' => array(
+            'httpMethod' => 'GET',
+            'uri' => 'print-publication-links',
+            'summary' => 'List print publication links',
+            'parameters' => array(
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+            ),
+            'responseClass' => Response\ListResponse::CLASS,
+            'responseDataRoot' => 'print_publication_links',
+        ),
         'listPrintPublications' => array(
             'httpMethod' => 'GET',
             'uri' => 'print-publications',
@@ -45,6 +66,27 @@ return array(
                 ),
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
+        ),
+        'listPrintPublicationArticles' => array(
+            'httpMethod' => 'GET',
+            'uri' => 'print-publications/{print_publication_id}/articles',
+            'summary' => 'List print publication articles',
+            'parameters' => array(
+                'print_publication_id' => array(
+                    'description' => 'The ID of the print publication to fetch the articles from',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+            ),
+            'responseClass' => Response\ListResponse::CLASS,
+            'responseDataRoot' => 'print_publication_articles',
         ),
     ),
     'models' => array(
