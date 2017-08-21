@@ -17,8 +17,24 @@ if (isset($_GET['page_size'])) {
     $params['page_size'] = (int) $_GET['page_size'];
 }
 
+$params['filter'] = array(
+    array(
+        'property' => 'valid_to',
+        'value' => '2017-08-20',
+        'operator' => '>', // greater than
+        'type' => 'date',
+    ),
+);
+
+$params['sort'] = array(
+    array(
+        'property' => 'valid_to',
+        'direction' => 'asc',
+    ),
+);
+
 $client = AdvertisingClient::factory($config);
 
-$response = $client->listPrintPublicationArticles($params);
+$response = $client->listPrintPublicationLinks($params);
 
 var_dump($response->getResources());

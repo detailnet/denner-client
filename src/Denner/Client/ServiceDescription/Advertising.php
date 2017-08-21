@@ -73,7 +73,7 @@ return array(
             'summary' => 'List print publication articles',
             'parameters' => array(
                 'print_publication_id' => array(
-                    'description' => 'The ID of the print publication to fetch',
+                    'description' => 'The ID of the print publication to fetch the articles from',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
@@ -83,12 +83,6 @@ return array(
                 ),
                 'page_size' => array(
                     '$ref' => 'PageSizeParam',
-                ),
-                'filter' => array(
-                    '$ref' => 'FilterParam',
-                ),
-                'sort' => array(
-                    '$ref' => 'SortParam',
                 ),
             ),
             'responseClass' => Response\ListResponse::CLASS,
