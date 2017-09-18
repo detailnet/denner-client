@@ -43,6 +43,22 @@ class ArticlesClient extends DennerClient
     }
 
     /**
+     * @return string
+     */
+    public function getBroadcastActionKey()
+    {
+        return $this->broadcastActionKey;
+    }
+
+    /**
+     * @param string $broadcastActionKey
+     */
+    public function setBroadcastActionKey($broadcastActionKey)
+    {
+        $this->broadcastActionKey = $broadcastActionKey;
+    }
+
+    /**
      * @param array $params
      * @param string $broadcastAction
      * @return Response\ResourceResponse
@@ -117,21 +133,5 @@ class ArticlesClient extends DennerClient
         $this->addOrReplaceFilters($filters, $params);
 
         return $this->listAdvertisedArticles($params);
-    }
-
-    /**
-     * @return string
-     */
-    public function getBroadcastActionKey()
-    {
-        return $this->broadcastActionKey;
-    }
-
-    /**
-     * @param string $broadcastActionKey
-     */
-    public function setBroadcastActionKey($broadcastActionKey)
-    {
-        $this->broadcastActionKey = $broadcastActionKey;
     }
 }
