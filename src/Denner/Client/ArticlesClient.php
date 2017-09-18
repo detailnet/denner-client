@@ -33,8 +33,8 @@ class ArticlesClient extends DennerClient
      */
     public static function factory($options = array())
     {
-        /** @var  ArticlesClient $client */
-       $client = parent::factory($options);
+        /** @var ArticlesClient $client */
+        $client = parent::factory($options);
 
         if (isset($options[self::OPTION_BROADCAST_ACTION_KEY])) {
             $client->setBroadcastActionKey($options[self::OPTION_BROADCAST_ACTION_KEY]);
@@ -55,7 +55,7 @@ class ArticlesClient extends DennerClient
         $command = $this->getCommand('fetchAdvertisedArticle', $params);
         $command->getEmitter()->on(
             'prepared',
-            function (PreparedEvent $event) use ($broadcastAction){
+            function (PreparedEvent $event) use ($broadcastAction) {
                 $event->getRequest()->setHeader($this->getBroadcastActionKey(), $broadcastAction);
             },
             'last'
