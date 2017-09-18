@@ -43,6 +43,13 @@ return array(
                     'type' => 'string',
                     'required' => true,
                 ),
+                'broadcast_actions' => array(
+                    'description' => 'Request for broadcast',
+                    'location' => 'header',
+                    'sentAs' => 'X-Denner-Broadcast',
+                    'type' => 'string',
+                    'required' => false,
+                ),
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
         ),

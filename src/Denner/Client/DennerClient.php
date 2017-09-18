@@ -23,6 +23,10 @@ abstract class DennerClient extends ServiceClient
     const HEADER_APP_ID  = 'App-ID';
     const HEADER_APP_KEY = 'App-Key';
 
+    /**
+     * @param array $options
+     * @return static
+     */
     public static function factory($options = array())
     {
 //        $requiredOptions = array();
