@@ -19,17 +19,9 @@ abstract class DennerClient extends ServiceClient
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
-    const OPTION_BROADCAST_ACTION_KEY = 'broadcast_action_key';
 
     const HEADER_APP_ID  = 'App-ID';
     const HEADER_APP_KEY = 'App-Key';
-
-    const BROADCAST_ACTION_UPDATE = 'UPDATE';
-
-    /**
-     * @var string
-     */
-    protected $broadcastActionKey = 'X-Broadcast';
 
     /**
      * @param array $options
@@ -100,10 +92,6 @@ abstract class DennerClient extends ServiceClient
         $description = new ServiceDescription(require $serviceDescriptionFile);
         $client = new static($httpClient, $description);
 
-        if (isset($options[self::OPTION_BROADCAST_ACTION_KEY])) {
-            $client->setBroadcastActionKey($options[self::OPTION_BROADCAST_ACTION_KEY]);
-        }
-
         return $client;
     }
 
@@ -124,22 +112,6 @@ abstract class DennerClient extends ServiceClient
         $emitter = $this->getEmitter();
         $emitter->attach(new Subscriber\Command\PrepareRequest($description));
         $emitter->attach(new Subscriber\Command\ProcessResponse($description));
-    }
-
-    /**
-     * @return string
-     */
-    public function getBroadcastActionKey()
-    {
-        return $this->broadcastActionKey;
-    }
-
-    /**
-     * @param string $broadcastActionKey
-     */
-    public function setBroadcastActionKey($broadcastActionKey)
-    {
-        $this->broadcastActionKey = $broadcastActionKey;
     }
 
     /**

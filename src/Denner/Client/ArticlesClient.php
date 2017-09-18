@@ -2,14 +2,13 @@
 
 namespace Denner\Client;
 
-use GuzzleHttp\Command\Event\PreparedEvent;
-
 use Denner\Client\Response;
 
 /**
  * Denner Articles Service client.
  *
  * @method Response\ListResponse listAdvertisedArticles(array $params = array())
+ * @method Response\ResourceResponse fetchAdvertisedArticle(array $params = array())
  * @method Response\ResourceResponse updateAdvertisedArticle(array $params = array())
  * @method Response\ListResponse listLanguages(array $params = array())
  * @method Response\ResourceResponse fetchLanguage(array $params = array())
@@ -17,28 +16,6 @@ use Denner\Client\Response;
  */
 class ArticlesClient extends DennerClient
 {
-    /**
-     * @param array $params
-     * @param string $broadcastAction
-     * @return Response\ResourceResponse
-     */
-    public function fetchAdvertisedArticle(array $params = array(), $broadcastAction = null)
-    {
-        $command = $this->getCommand('fetchAdvertisedArticle', $params);
-
-        if ($broadcastAction !== null) {
-            $command->getEmitter()->on(
-                'prepared',
-                function (PreparedEvent $event) use ($broadcastAction) {
-                    $event->getRequest()->setHeader($this->getBroadcastActionKey(), $broadcastAction);
-                },
-                'last'
-            );
-        }
-
-        return $this->execute($command);
-    }
-
     /**
      * @param integer $year
      * @param integer $week
