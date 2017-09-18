@@ -10,7 +10,6 @@ use Denner\Client\Response;
  * Denner Articles Service client.
  *
  * @method Response\ListResponse listAdvertisedArticles(array $params = array())
- * @method Response\ResourceResponse fetchAdvertisedArticle(array $params = array())
  * @method Response\ResourceResponse updateAdvertisedArticle(array $params = array())
  * @method Response\ListResponse listLanguages(array $params = array())
  * @method Response\ResourceResponse fetchLanguage(array $params = array())
@@ -48,18 +47,19 @@ class ArticlesClient extends DennerClient
      * @param string $broadcastAction
      * @return Response\ResourceResponse
      */
-    public function fetchAdvertisedArticleAndRequestBroadcast(
-        array $params = array(),
-        $broadcastAction = self::BROADCAST_ACTION_UPDATE
-    ) {
+    public function fetchAdvertisedArticle(array $params = array(), $broadcastAction = null)
+    {
         $command = $this->getCommand('fetchAdvertisedArticle', $params);
-        $command->getEmitter()->on(
-            'prepared',
-            function (PreparedEvent $event) use ($broadcastAction) {
-                $event->getRequest()->setHeader($this->getBroadcastActionKey(), $broadcastAction);
-            },
-            'last'
-        );
+
+        if ($broadcastAction !== null) {
+            $command->getEmitter()->on(
+                'prepared',
+                function (PreparedEvent $event) use ($broadcastAction) {
+                    $event->getRequest()->setHeader($this->getBroadcastActionKey(), $broadcastAction);
+                },
+                'last'
+            );
+        }
 
         return $this->execute($command);
     }
