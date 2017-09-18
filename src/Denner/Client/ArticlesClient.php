@@ -17,47 +17,6 @@ use Denner\Client\Response;
  */
 class ArticlesClient extends DennerClient
 {
-    const OPTION_BROADCAST_ACTION_KEY = 'broadcast_action_key';
-
-    const BROADCAST_ACTION_UPDATE = 'UPDATE';
-
-    /**
-     * @var string
-     */
-    protected $broadcastActionKey = 'X-Broadcast';
-
-    /**
-     * @param array $options
-     * @return ArticlesClient
-     */
-    public static function factory($options = array())
-    {
-        /** @var ArticlesClient $client */
-        $client = parent::factory($options);
-
-        if (isset($options[self::OPTION_BROADCAST_ACTION_KEY])) {
-            $client->setBroadcastActionKey($options[self::OPTION_BROADCAST_ACTION_KEY]);
-        }
-
-        return $client;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBroadcastActionKey()
-    {
-        return $this->broadcastActionKey;
-    }
-
-    /**
-     * @param string $broadcastActionKey
-     */
-    public function setBroadcastActionKey($broadcastActionKey)
-    {
-        $this->broadcastActionKey = $broadcastActionKey;
-    }
-
     /**
      * @param array $params
      * @param string $broadcastAction
