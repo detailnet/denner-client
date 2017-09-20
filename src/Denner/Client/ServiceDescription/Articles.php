@@ -5,6 +5,7 @@ use Denner\Client\Response;
 return array(
     'name' => 'Denner Articles Service',
     'operations' => array(
+        // Advertised articles
         'listAdvertisedArticles' => array(
             'httpMethod' => 'GET',
             'uri' => 'advertised-articles',
@@ -70,6 +71,29 @@ return array(
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
         ),
+        // Articles
+        'fetchArticle' => array(
+            'httpMethod' => 'GET',
+            'uri' => 'articles/{article_id}',
+            'summary' => 'Fetch an article',
+            'parameters' => array(
+                'article_id' => array(
+                    'description' => 'The ID of the article to fetch',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'broadcast_actions' => array(
+                    'description' => 'Request for broadcast',
+                    'location' => 'header',
+                    'sentAs' => 'X-Denner-Broadcast',
+                    'type' => 'string',
+                    'required' => false,
+                ),
+            ),
+            'responseClass' => Response\ResourceResponse::CLASS,
+        ),
+        // Languages
         'listLanguages' => array(
             'httpMethod' => 'GET',
             'uri' => 'languages',
@@ -92,6 +116,7 @@ return array(
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'languages',
         ),
+        // Promotions
         'listPromotions' => array(
             'httpMethod' => 'GET',
             'uri' => 'promotions',
