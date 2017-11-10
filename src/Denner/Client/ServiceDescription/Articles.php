@@ -83,8 +83,14 @@ return array(
                     'type' => 'string',
                     'required' => true,
                 ),
+                'quantity' => array(
+                    'description' => 'Quantity (for texts and price)',
+                    'location' => 'query',
+                    'required' => false,
+                    'type' => 'integer',
+                ),
                 'price-selection' => array(
-                    '$ref' => 'PricePropertiesParam',
+                    '$ref' => 'PriceSelectionParam',
                 ),
                 'broadcast_actions' => array(
                     'description' => 'Request for broadcast',
@@ -213,21 +219,16 @@ return array(
                 '$ref' => 'Sort',
             ),
         ),
-        'PricePropertiesParam' => array(
-            'description' => 'Price properties',
+        'PriceSelectionParam' => array(
+            'description' => 'Price selection',
             'location' => 'query',
             'required' => false,
             'type' => 'object',
             'properties' => array(
                 'valid_on' => array(
-                    'description' => 'Price for day',
+                    'description' => 'Price for day (Default "today")',
                     'type' => 'string',
-                    'required' => true,
-                ),
-                'quantity' => array(
-                    'description' => 'Price quantity',
-                    'type' => 'integer',
-                    'required' => true,
+                    'required' => false,
                 ),
                 'level' => array(
                     'description' => 'Price level',
