@@ -35,13 +35,13 @@ return array(
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
         ),
-        'listWineAppraisals' => array(
+        'listWineAppraisalsByWine' => array(
             'httpMethod' => 'GET',
             'uri' => 'wines/{wine_id}/appraisals',
             'summary' => 'List a wine\'s appraisals',
             'parameters' => array(
                 'wine_id' => array(
-                    'description' => 'The ID of the wine for which to create the new appraisal',
+                    'description' => 'The ID of the wine for which to list the appraisals',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
