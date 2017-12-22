@@ -3,20 +3,16 @@
 use Denner\Client\ShopClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
-$filterParams = array(
-    'id',
-    'wine_id',
-    'shop_user_id',
-    'email',
-    'source',
-);
 
-foreach ($filterParams as $param) {
-    if (isset($_GET[$param])) {
-        $params[$param] = $_GET[$param];
-    }
+$wineId = @$_GET['wine_id'] ?: '44444444-aaaa-4444-aaaa-444444444444';
+
+if (!$wineId) {
+    throw new RuntimeException('Missing or invalid parameter "wine_id"');
 }
+
+$params = array(
+    'wine_id' => $wineId,
+);
 
 // Example: ?page=2
 if (isset($_GET['page'])) {
@@ -28,10 +24,10 @@ if (isset($_GET['page_size'])) {
     $params['page_size'] = (int) $_GET['page_size'];
 }
 
-$params['sort'] = @$_GET['sort'] ?: 'created_on__asc';
+$params['sort'] = @$_GET['sort'] ?: 'created_on__desc';
 
 $client = ShopClient::factory($config);
 
-$response = $client->listWineAppraisals($params);
+$response = $client->listWineAppraisalsByWine($params);
 
 var_dump($response);

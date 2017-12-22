@@ -15,7 +15,7 @@ use Denner\Client\Subscriber;
 
 abstract class DennerClient extends ServiceClient
 {
-    const CLIENT_VERSION = '0.3.0';
+    const CLIENT_VERSION = '1.3.0';
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';

@@ -35,6 +35,54 @@ return array(
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
         ),
+        'listWineAppraisals' => array(
+            'httpMethod' => 'GET',
+            'uri' => 'appraisals',
+            'summary' => 'List a wine appraisals',
+            'parameters' => array(
+                'id' => array(
+                    'description' => 'Filter by ID',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ),
+                'wine_id' => array(
+                    'description' => 'Filter by wine',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ),
+                'shop_user_id' => array(
+                    'description' => 'Filter by Wineshop user ID',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ),
+                'email' => array(
+                    'description' => 'Filter by email address',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ),
+                'source' => array(
+                    'description' => 'Filter by source',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ),
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+            ),
+            'responseClass' => Response\ListResponse::CLASS,
+            'responseDataRoot' => 'appraisals',
+        ),
         'listWineAppraisalsByWine' => array(
             'httpMethod' => 'GET',
             'uri' => 'wines/{wine_id}/appraisals',
