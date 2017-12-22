@@ -38,33 +38,33 @@ return array(
         'listWineAppraisals' => array(
             'httpMethod' => 'GET',
             'uri' => 'appraisals',
-            'summary' => 'List a wine appraisals',
+            'summary' => 'List appraisals',
             'parameters' => array(
-                'id' => array(
+                'f.id' => array(
                     'description' => 'Filter by ID',
                     'location' => 'query',
                     'type' => 'string',
                     'required' => false,
                 ),
-                'wine_id' => array(
-                    'description' => 'Filter by wine',
+                'f.wine_id' => array(
+                    'description' => 'Filter by wine ID',
                     'location' => 'query',
                     'type' => 'string',
                     'required' => false,
                 ),
-                'shop_user_id' => array(
+                'f.shop_user_id' => array(
                     'description' => 'Filter by Wineshop user ID',
                     'location' => 'query',
-                    'type' => 'string',
+                    'type' => 'integer',
                     'required' => false,
                 ),
-                'email' => array(
+                'f.email' => array(
                     'description' => 'Filter by email address',
                     'location' => 'query',
                     'type' => 'string',
                     'required' => false,
                 ),
-                'source' => array(
+                'f.source' => array(
                     'description' => 'Filter by source',
                     'location' => 'query',
                     'type' => 'string',
@@ -86,7 +86,7 @@ return array(
         'listWineAppraisalsByWine' => array(
             'httpMethod' => 'GET',
             'uri' => 'wines/{wine_id}/appraisals',
-            'summary' => 'List a wine\'s appraisals',
+            'summary' => 'List the appraisals of a given wine',
             'parameters' => array(
                 'wine_id' => array(
                     'description' => 'The ID of the wine for which to list the appraisals',
