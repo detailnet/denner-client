@@ -19,7 +19,7 @@ if (file_exists($globalConfigFile)) {
     $config = require $globalConfigFile;
 }
 
-// That that this is not the config.php in this directory
+// Note that this is not the config.php in this directory
 // but the file in the directory where the script is running.
 if (file_exists('config.php')) {
     $config = array_merge($config, require 'config.php');
