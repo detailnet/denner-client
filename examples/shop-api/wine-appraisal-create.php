@@ -4,7 +4,7 @@ use Denner\Client\ShopClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
 
-$wineId = @$_GET['wine_id'] ?: '44444444-aaaa-4444-aaaa-444444444444';
+$wineId = @$_GET['wine_id'];
 
 if (!$wineId) {
     throw new RuntimeException('Missing or invalid parameter "wine_id"');
