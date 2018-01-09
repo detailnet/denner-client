@@ -10,7 +10,31 @@ return array(
             'uri' => 'sweepstake-participants',
             'summary' => 'Create a sweepstake participant',
             'parameters' => array(
-                /** @todo Define actions properly and remove "additionalParameters" as catch-all... */
+                /** @todo Define params properly and remove "additionalParameters" as catch-all... */
+            ),
+            'additionalParameters' => array(
+                'location' => 'json',
+            ),
+            'responseClass' => Response\ResourceResponse::CLASS,
+        ),
+        'createWineAppraisalVote' => array(
+            'httpMethod' => 'POST',
+            'uri' => 'wines/{wine_id}/appraisals/{appraisal_id}/votes',
+            'summary' => 'Vote on a wine appraisal',
+            'parameters' => array(
+                'wine_id' => array(
+                    'description' => 'The ID of the wine for which to create the new vote',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'appraisal_id' => array(
+                    'description' => 'The ID of the appraisal for which to create the new vote',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                /** @todo Define params properly and remove "additionalParameters" as catch-all... */
             ),
             'additionalParameters' => array(
                 'location' => 'json',
