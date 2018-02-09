@@ -149,6 +149,24 @@ return array(
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'articles',
         ),
+        'listWineGrowers' => array(
+            'httpMethod' => 'GET',
+            'uri' => 'wine-growers',
+            'summary' => 'List wine growers',
+            'parameters' => array(
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+            ),
+            'responseClass' => Response\ListResponse::CLASS,
+            'responseDataRoot' => 'wine_growers',
+        ),
     ),
     'models' => array(
         'PageParam' => array(
