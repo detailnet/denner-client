@@ -124,9 +124,9 @@ return array(
                 'page_size' => array(
                     '$ref' => 'PageSizeParam',
                 ),
-                'sort' => array(
-                    '$ref' => 'SortParam',
-                ),
+//                'sort' => array(
+//                    '$ref' => 'SortParam',
+//                ),
             ),
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'appraisals',
@@ -145,6 +145,9 @@ return array(
                 'sort' => array(
                     '$ref' => 'SortParam',
                 ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
             ),
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'articles',
@@ -162,6 +165,9 @@ return array(
                 ),
                 'sort' => array(
                     '$ref' => 'SortParam',
+                ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
                 ),
             ),
             'responseClass' => Response\ListResponse::CLASS,
@@ -182,7 +188,13 @@ return array(
             'required' => false,
         ),
         'SortParam' => array(
-            'description' => 'The sort field and direction',
+            'description' => 'The rules for sorting',
+            'location' => 'query',
+            'type' => 'string',
+            'required' => false,
+        ),
+        'FilterParam' => array(
+            'description' => 'The rules for filtering',
             'location' => 'query',
             'type' => 'string',
             'required' => false,
