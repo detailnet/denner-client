@@ -124,9 +124,9 @@ return array(
                 'page_size' => array(
                     '$ref' => 'PageSizeParam',
                 ),
-                'sort' => array(
-                    '$ref' => 'SortParam',
-                ),
+//                'sort' => array(
+//                    '$ref' => 'SortParam',
+//                ),
             ),
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'appraisals',
@@ -145,9 +145,33 @@ return array(
                 'sort' => array(
                     '$ref' => 'SortParam',
                 ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
             ),
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'articles',
+        ),
+        'listWineGrowers' => array(
+            'httpMethod' => 'GET',
+            'uri' => 'wine-growers',
+            'summary' => 'List wine growers',
+            'parameters' => array(
+                'page' => array(
+                    '$ref' => 'PageParam',
+                ),
+                'page_size' => array(
+                    '$ref' => 'PageSizeParam',
+                ),
+                'sort' => array(
+                    '$ref' => 'SortParam',
+                ),
+                'filter' => array(
+                    '$ref' => 'FilterParam',
+                ),
+            ),
+            'responseClass' => Response\ListResponse::CLASS,
+            'responseDataRoot' => 'wine_growers',
         ),
     ),
     'models' => array(
@@ -164,7 +188,13 @@ return array(
             'required' => false,
         ),
         'SortParam' => array(
-            'description' => 'The sort field and direction',
+            'description' => 'The rules for sorting',
+            'location' => 'query',
+            'type' => 'string',
+            'required' => false,
+        ),
+        'FilterParam' => array(
+            'description' => 'The rules for filtering',
             'location' => 'query',
             'type' => 'string',
             'required' => false,

@@ -13,6 +13,7 @@ use Denner\Client\Response;
  * @method Response\ListResponse listWineAppraisals(array $params = array())
  * @method Response\ListResponse listWineAppraisalsByWine(array $params = array())
  * @method Response\ListResponse listWines(array $params = array())
+ * @method Response\ListResponse listWineGrowers(array $params = array())
  */
 class ShopClient extends DennerClient
 {

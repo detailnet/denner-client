@@ -15,21 +15,21 @@ if (isset($_GET['page_size'])) {
     $params['page_size'] = (int) $_GET['page_size'];
 }
 
-$params['sort'] = json_encode(
-    array(
-        array(
-            'property' => 'id',
-            'direction' => 'asc',
-        ),
-    )
-);
+//$params['sort'] = json_encode(
+//    array(
+//        array(
+//            'property' => 'name',
+//            'direction' => 'asc',
+//        ),
+//    )
+//);
 
 $client = ShopClient::factory($config);
 
-$response = $client->listWines($params);
+$response = $client->listWineGrowers($params);
 
 var_dump($response);
 var_dump(iterator_to_array($response->getIterator()));
 
-// To access specific properties of a wine at any depth:
-//var_dump($response->getResources()[0]->search('wine.country'));
+// To access specific properties of a wine grower at any depth:
+//var_dump($response->getResources()[0]->search('picture.cdn_url'));
