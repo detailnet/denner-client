@@ -15,18 +15,18 @@ if (isset($_GET['page_size'])) {
     $params['page_size'] = (int) $_GET['page_size'];
 }
 
-$params['sort'] = json_encode(
-    array(
-        array(
-            'property' => 'id',
-            'direction' => 'asc',
-        ),
-    )
-);
+//$params['sort'] = json_encode(
+//    array(
+//        array(
+//            'property' => 'id',
+//            'direction' => 'asc',
+//        ),
+//    )
+//);
 
 $client = ShopClient::factory($config);
 
-$response = $client->listWines($params);
+$response = $client->listWineGrowers($params);
 
 var_dump($response);
 var_dump(iterator_to_array($response->getIterator()));
