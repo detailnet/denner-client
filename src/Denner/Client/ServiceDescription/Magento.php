@@ -28,9 +28,49 @@ return array(
             //'tag' => 'catalogProductRepositoryV1',
             'httpMethod' => 'GET',
             'uri' => 'V1/products',
-            'summary' => 'Get product list.',
+            'summary' => 'Get products that match specified search criteria.',
             'parameters' => array(
-                'Authorisation' => array(
+                'Authorization' => array(
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'searchCriteria' =>  array(
+                    '$ref' => 'SearchCriteria',
+                ),
+            ),
+            'responseClass' => Response\ResourceResponse::CLASS,
+        ),
+        'getProductStock' => array(
+            //'tag' => 'catalogInventoryStockRegistryV1',
+            'httpMethod' => 'GET',
+            'uri' => 'V1/stockStatuses/{productSku}',
+            'summary' => 'Get stock status for a wine.',
+            'parameters' => array(
+                'productSku' => array(
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'Authorization' => array(
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'scopeId' =>  array(
+                    'type' => 'number',
+                    'required' => false,
+                ),
+            ),
+            'responseClass' => Response\ResourceResponse::CLASS,
+        ),
+        'listOrders' => array(
+            //'tag' => 'salesOrderRepositoryV1',
+            'httpMethod' => 'GET',
+            'uri' => 'V1/orders',
+            'summary' => 'Lists orders that match specified search criteria.',
+            'parameters' => array(
+                'Authorization' => array(
                     'location' => 'header',
                     'type' => 'string',
                     'required' => true,

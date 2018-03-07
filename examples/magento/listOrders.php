@@ -8,16 +8,14 @@ $params = array(
 
 $client = MagentoClient::factory($config);
 
-$token = @$_GET['token'] ?: 'ajs8vvnm0vgk976iiqv6optdsjucp05r';
+$token = @$_GET['token'] ?: 'jkk16urlk98s3si86i5uc3lyyher7f9h';
+$from  = @$_GET['from'] ?: '2018-01-01 00:00:00';
 
 if (!$token) {
     throw new RuntimeException('Missing or invalid parameter "token"');
 }
 
-
-var_dump($token);
-
-$response = $client->listProducts(
+$response = $client->listOrders(
     array(
         'Authorization' => sprintf('Bearer %s', $token),
         'searchCriteria' => array(
@@ -26,26 +24,17 @@ $response = $client->listProducts(
                     'filters' => array( // FilterGroups are connected with OR
                         array(
                             'field' => 'status',
-                            'conditionType' => 'eq',
-                            'value' => '1', // 1 = online, other are offline
+                            'conditionType' => 'neq',
+                            'value' => 'canceled',
                         ),
                     ),
                 ),
                 array(
                     'filters' => array(
                         array(
-                            'field' => 'visibility',
-                            'conditionType' => 'eq',
-                            'value' => '4', // 4 = visible in the shop
-                        )
-                    )
-                ),
-                array(
-                    'filters' => array(
-                        array(
-                            'field' => 'attribute_set_id',
-                            'conditionType' => 'eq',
-                            'value' => '9', // 9 = wine, there might be banners too
+                            'field' => 'created_at',
+                            'conditionType' => 'gt',
+                            'value' => $from,
                         )
                     )
                 ),
@@ -57,4 +46,24 @@ $response = $client->listProducts(
 
 
 var_dump($response->getResource());
-echo '<pre>'; print_r($response->getResource()->get('items'));
+// echo '<pre>'; print_r($response->getResource()->get('items'));
+
+$orders = array();
+foreach ($response->getResource()->get('items') as $order)  {
+    //var_dump($order);
+    $data = array(
+        'increment_id' => $order['increment_id'],
+        'items' => array(),
+    );
+
+    foreach ($order['items'] as $item) {
+        //var_dump($item);
+        $data['items'][] = sprintf('%s x %s: %s', $item['qty_ordered'], $item['sku'], $item['name']);
+    }
+
+    $orders[] = $data;
+}
+
+var_dump($orders);
+
+
