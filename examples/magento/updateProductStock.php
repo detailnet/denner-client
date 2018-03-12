@@ -22,12 +22,10 @@ $response = $client->updateProductStock(
         'Authorization' => sprintf('Bearer %s', $token),
         'productSku' => $id,
         'itemId' => $pid, // Has no effect on the result, is ignored but has to be present
-        //'body' => array(
-            'stockItem' => array(
-                "qty" => $stock,
-        		"is_in_stock" => $stock > 0
-            ),
-        //),
+        'stockItem' => array(
+            "qty" => $stock,
+            "is_in_stock" => $stock > 0,
+        ),
     )
 );
 

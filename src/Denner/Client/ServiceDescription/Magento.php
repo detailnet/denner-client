@@ -85,19 +85,9 @@ return array(
                     'type' => 'string',
                     'required' => true,
                 ),
-//                'body' =>  array(
-//                    'location' => 'json',
-//                    'required' => true,
-//                    'type' => 'object',
-//                    'properties' => array(
-//                        'stockItem' => array(
-//                            '$ref' => 'StockItem',
-//                        ),
-//                    ),
-//                ),
-            ),
-            'additionalParameters' => array(
-                'location' => 'json',
+                'stockItem' => array(
+                    '$ref' => 'StockItemBody',
+                ),
             ),
             'responseClass' => Response\PlainTextResponse::CLASS,
         ),
@@ -191,7 +181,8 @@ return array(
                 ),
             ),
         ),
-        'StockItem' => array(
+        'StockItemBody' => array(
+            'location' => 'json',
             'type' => 'object',
             'properties' => array(
                 'qty' => array(
