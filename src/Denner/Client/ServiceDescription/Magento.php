@@ -22,7 +22,7 @@ return array(
                     'required' => true,
                 ),
             ),
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\PlainTextResponse::CLASS,
         ),
         'listProducts' => array(
             //'tag' => 'catalogProductRepositoryV1',
@@ -63,6 +63,43 @@ return array(
                 ),
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
+        ),
+        'updateProductStock' => array(
+            //'tag' => 'catalogInventoryStockRegistryV1',
+            'httpMethod' => 'PUT',
+            'uri' => 'V1/products/{productSku}/stockItems/{itemId}',
+            'summary' => 'Update stock for a wine.',
+            'parameters' => array(
+                'productSku' => array(
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'itemId' => array(
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+                'Authorization' => array(
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ),
+//                'body' =>  array(
+//                    'location' => 'json',
+//                    'required' => true,
+//                    'type' => 'object',
+//                    'properties' => array(
+//                        'stockItem' => array(
+//                            '$ref' => 'StockItem',
+//                        ),
+//                    ),
+//                ),
+            ),
+            'additionalParameters' => array(
+                'location' => 'json',
+            ),
+            'responseClass' => Response\PlainTextResponse::CLASS,
         ),
         'listOrders' => array(
             //'tag' => 'salesOrderRepositoryV1',
@@ -150,6 +187,19 @@ return array(
                 ),
                 'direction' => array(
                     'type' => 'string',
+                    'required' => false,
+                ),
+            ),
+        ),
+        'StockItem' => array(
+            'type' => 'object',
+            'properties' => array(
+                'qty' => array(
+                    'type' => 'integer',
+                    'required' => true,
+                ),
+                'is_in_stock' => array(
+                    'type' => 'boolean',
                     'required' => false,
                 ),
             ),

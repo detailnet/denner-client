@@ -16,23 +16,26 @@ $response = $client->integrationAdminToken(
 );
 
 
-$i = 0;
-$token = '';
+//$i = 0;
+//$token = '';
+//
+//// Result is a plain string, not JSON as should be.
+//// Can't get resource (results in error for the malformed body), but can get each byte of the body
+//while (($c = $response->offsetGet($i++)) !== null) {
+//   $token .= $c;
+//}
 
-// Result is a plain string, not JSON as should be.
-// Can't get resource (results in error for the malformed body), but can get each byte of the body
-while (($c = $response->offsetGet($i++)) !== null) {
-   $token .= $c;
-}
+$token = $response->getResource()->get('response');
 
 var_dump('Token:', $token);
 
 $url = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
 
 $operations = array(
-    'listProducts'    => sprintf('?token=%s', $token),
-    'getProductStock' => sprintf('?token=%s&id=%s', $token , '050005'),
-    'listOrders'      => sprintf('?token=%s&from=%s', $token, urlencode('2018-01-01 00:00:00')),
+    'listProducts'       => sprintf('?token=%s', $token),
+    'getProductStock'    => sprintf('?token=%s&id=%s', $token, '050005'),
+    'updateProductStock' => sprintf('?token=%s&id=%s&pid=%s&stock=%s', $token, '050005', '666', '123'),
+    'listOrders'         => sprintf('?token=%s&from=%s', $token, urlencode('2018-01-01 00:00:00')),
 );
 
 foreach ($operations as $operation => $params) {
