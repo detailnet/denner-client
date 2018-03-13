@@ -3,19 +3,14 @@
 use Denner\Client\MagentoClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array(
-);
 
 $client = MagentoClient::factory($config);
 
-$token = @$_GET['token'] ?: 'ajs8vvnm0vgk976iiqv6optdsjucp05r';
+$token = @$_GET['token'] ?: false;
 
 if (!$token) {
     throw new RuntimeException('Missing or invalid parameter "token"');
 }
-
-
-var_dump($token);
 
 $response = $client->listProducts(
     array(
@@ -54,7 +49,6 @@ $response = $client->listProducts(
         ),
     )
 );
-
 
 var_dump($response->getResource());
 echo '<pre>'; print_r($response->getResource()->get('items'));

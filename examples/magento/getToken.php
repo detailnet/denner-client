@@ -3,27 +3,15 @@
 use Denner\Client\MagentoClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array(
-);
 
 $client = MagentoClient::factory($config);
 
-$response = $client->integrationAdminToken(
+$response = $client->getToken(
     array(
         'username' => $config[MagentoClient::OPTION_USERNAME],
         'password' => $config[MagentoClient::OPTION_PASSWORD],
     )
 );
-
-
-//$i = 0;
-//$token = '';
-//
-//// Result is a plain string, not JSON as should be.
-//// Can't get resource (results in error for the malformed body), but can get each byte of the body
-//while (($c = $response->offsetGet($i++)) !== null) {
-//   $token .= $c;
-//}
 
 $token = $response->getResource()->get('response');
 

@@ -3,17 +3,20 @@
 use Denner\Client\MagentoClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array(
-);
 
 $client = MagentoClient::factory($config);
 
-$token = @$_GET['token'] ?: 'jkk16urlk98s3si86i5uc3lyyher7f9h';
-$from  = @$_GET['from'] ?: '2018-01-01 00:00:00';
+$token = @$_GET['token'] ?: false;
+$from  = @$_GET['from'] ?: false;
 
 if (!$token) {
     throw new RuntimeException('Missing or invalid parameter "token"');
 }
+
+if (!$from) {
+    throw new RuntimeException('Missing or invalid parameter "from"');
+}
+
 
 $response = $client->listOrders(
     array(
@@ -43,7 +46,6 @@ $response = $client->listOrders(
         ),
     )
 );
-
 
 var_dump($response->getResource());
 // echo '<pre>'; print_r($response->getResource()->get('items'));

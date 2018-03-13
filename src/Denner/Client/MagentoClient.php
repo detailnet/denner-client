@@ -8,7 +8,7 @@ use Denner\Client\Subscriber;
 /**
  * Magento 2 API client.
  *
- * @method Response\PlainTextResponse integrationAdminToken(array $params = array())
+ * @method Response\PlainTextResponse getToken(array $params = array())
  * @method Response\ResourceResponse listProducts(array $params = array())
  * @method Response\ResourceResponse getProductStock(array $params = array())
  * @method Response\PlainTextResponse updateProductStock(array $params = array())

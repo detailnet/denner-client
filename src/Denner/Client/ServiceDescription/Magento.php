@@ -5,7 +5,7 @@ use Denner\Client\Response;
 return array(
     'name' => 'Magento Commerce for B2B 2.2',
     'operations' => array(
-        'integrationAdminToken' => array(
+        'getToken' => array(
             //'tag' => 'integrationAdminTokenServiceV1',
             'httpMethod' => 'POST',
             'uri' => 'V1/integration/admin/token',
@@ -36,7 +36,7 @@ return array(
                     'required' => true,
                 ),
                 'searchCriteria' =>  array(
-                    '$ref' => 'SearchCriteria',
+                    '$ref' => 'SearchCriteriaParam',
                 ),
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
@@ -86,7 +86,7 @@ return array(
                     'required' => true,
                 ),
                 'stockItem' => array(
-                    '$ref' => 'StockItemBody',
+                    '$ref' => 'StockItemParam',
                 ),
             ),
             'responseClass' => Response\PlainTextResponse::CLASS,
@@ -103,14 +103,14 @@ return array(
                     'required' => true,
                 ),
                 'searchCriteria' =>  array(
-                    '$ref' => 'SearchCriteria',
+                    '$ref' => 'SearchCriteriaParam',
                 ),
             ),
             'responseClass' => Response\ResourceResponse::CLASS,
         ),
     ),
     'models' => array(
-        'SearchCriteria' => array(
+        'SearchCriteriaParam' => array(
             'location' => 'query',
             'type' => 'array',
             'required' => true,
@@ -181,7 +181,7 @@ return array(
                 ),
             ),
         ),
-        'StockItemBody' => array(
+        'StockItemParam' => array(
             'location' => 'json',
             'type' => 'object',
             'properties' => array(
