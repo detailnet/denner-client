@@ -17,14 +17,13 @@ if (!$from) {
     throw new RuntimeException('Missing or invalid parameter "from"');
 }
 
-
 $response = $client->listOrders(
     array(
         'Authorization' => sprintf('Bearer %s', $token),
         'searchCriteria' => array(
             'filterGroups' => array( // FilterGroups are connected with AND
                 array(
-                    'filters' => array( // FilterGroups are connected with OR
+                    'filters' => array( // Filters are connected with OR
                         array(
                             'field' => 'status',
                             'conditionType' => 'neq',

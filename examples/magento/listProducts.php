@@ -18,7 +18,7 @@ $response = $client->listProducts(
         'searchCriteria' => array(
             'filterGroups' => array( // FilterGroups are connected with AND
                 array(
-                    'filters' => array( // FilterGroups are connected with OR
+                    'filters' => array( // Filters are connected with OR
                         array(
                             'field' => 'status',
                             'conditionType' => 'eq',
