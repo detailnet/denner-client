@@ -50,6 +50,7 @@ var_dump($response->getResource());
 // echo '<pre>'; print_r($response->getResource()->get('items'));
 
 $orders = array();
+
 foreach ($response->getResource()->get('items') as $order)  {
     //var_dump($order);
     $data = array(
