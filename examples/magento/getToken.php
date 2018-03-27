@@ -8,8 +8,8 @@ $client = MagentoClient::factory($config);
 
 $response = $client->getToken(
     array(
-        'username' => $config[MagentoClient::OPTION_USERNAME],
-        'password' => $config[MagentoClient::OPTION_PASSWORD],
+        'username' => $config['username'],
+        'password' => $config['password'],
     )
 );
 

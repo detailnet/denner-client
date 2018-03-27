@@ -16,6 +16,4 @@ use Denner\Client\Subscriber;
  */
 class MagentoClient extends DennerClient
 {
-    const OPTION_USERNAME = 'username';
-    const OPTION_PASSWORD = 'password';
 }
