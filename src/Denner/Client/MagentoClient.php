@@ -1,0 +1,19 @@
+<?php
+
+namespace Denner\Client;
+
+use Denner\Client\Response;
+use Denner\Client\Subscriber;
+
+/**
+ * Magento 2 API client.
+ *
+ * @method Response\PlainTextResponse getToken(array $params = array())
+ * @method Response\ResourceResponse listProducts(array $params = array())
+ * @method Response\ResourceResponse getProductStock(array $params = array())
+ * @method Response\PlainTextResponse updateProductStock(array $params = array())
+ * @method Response\ResourceResponse listOrders(array $params = array())
+ */
+class MagentoClient extends DennerClient
+{
+}

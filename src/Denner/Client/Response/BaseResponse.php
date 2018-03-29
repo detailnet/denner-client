@@ -50,7 +50,17 @@ abstract class BaseResponse implements
     protected function getData()
     {
         try {
-            $data = $this->getHttpResponse()->json() ?: array();
+//            switch ($this->getHttpResponse()->getHeader('Content-Type')) {
+//                case 'application/xml; charset=utf-8':
+//                case 'application/xml':
+//                    $data = $this->xml2array($this->getHttpResponse()->xml());
+//                    break;
+//                case 'application/json; charset=utf-8':
+//                case 'application/json':
+//                default:
+                    $data = $this->getHttpResponse()->json() ?: array();
+//                    break;
+//            }
         } catch (GuzzleHttpException\ParseException $e) {
             throw new Exception\RuntimeException(
                 sprintf('Parse exception requesting \'%s\'', $e->getResponse()->getEffectiveUrl()),
@@ -69,4 +79,19 @@ abstract class BaseResponse implements
     {
         return $this->getData();
     }
+
+//    /**
+//     * @todo With this we loose all xml attributes if any and all listings are incorrectly handled (numeric keys)
+//     * @param \SimpleXMLElement|array $xmlObject
+//     * @param array $out
+//     * @return array
+//     */
+//    private function xml2array($xmlObject, $out = array())
+//    {
+//        foreach ((array) $xmlObject as $index => $node) {
+//            $out[$index] = (is_object($node) || is_array($node)) ? $this->xml2array($node) : $node;
+//        }
+//
+//        return $out;
+//    }
 }
