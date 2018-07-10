@@ -2,38 +2,38 @@
 
 namespace Denner\Client\Response;
 
-use GuzzleHttp\Message\ResponseInterface as HttpResponseInterface;
-use GuzzleHttp\Exception as GuzzleHttpException;
+use GuzzleHttp\Psr7\Response as PsrResponse;
 
 use Denner\Client\Exception;
 
 abstract class BaseResponse implements
-    ResponseInterface,
-    \ArrayAccess,
-    \Countable,
-    \IteratorAggregate
+    Response
 {
-    use HasDataTrait;
+    /**
+     * @var PsrResponse
+     */
+    protected $response;
 
     /**
-     * @var HttpResponseInterface
+     * @var array
      */
-    protected $httpResponse;
+    protected $data;
 
     /**
-     * @param HttpResponseInterface $response
+     * @param PsrResponse $response
      */
-    public function __construct(HttpResponseInterface $response)
+    public function __construct(PsrResponse $response)
     {
-        $this->httpResponse = $response;
+        $this->response = $response;
+        $this->data = $this->extractData();
     }
 
     /**
-     * @return HttpResponseInterface
+     * @return PsrResponse
      */
     public function getHttpResponse()
     {
-        return $this->httpResponse;
+        return $this->response;
     }
 
     /**
@@ -49,49 +49,51 @@ abstract class BaseResponse implements
      */
     protected function getData()
     {
-        try {
-//            switch ($this->getHttpResponse()->getHeader('Content-Type')) {
-//                case 'application/xml; charset=utf-8':
-//                case 'application/xml':
-//                    $data = $this->xml2array($this->getHttpResponse()->xml());
-//                    break;
-//                case 'application/json; charset=utf-8':
-//                case 'application/json':
-//                default:
-                    $data = $this->getHttpResponse()->json() ?: [];
-//                    break;
-//            }
-        } catch (GuzzleHttpException\ParseException $e) {
-            throw new Exception\RuntimeException(
-                sprintf('Parse exception requesting \'%s\'', $e->getResponse()->getEffectiveUrl()),
-                $e->getCode(),
-                $e
-            );
-        }
-
-        return $data;
+        return $this->data;
     }
 
     /**
      * @return array
      */
-    protected function getIterationData()
+    protected function extractData()
     {
-        return $this->getData();
+        try {
+            $data = $this->decodeJson($this->getHttpResponse()->getBody());
+
+            return is_array($data) ? $data : [];
+        } catch (\Exception $e) {
+            throw new Exception\RuntimeException(
+                sprintf('Failed extract data from HTTP response: %s', $e->getMessage()),
+                $e->getCode(),
+                $e
+            );
+        }
     }
 
-//    /**
-//     * @todo With this we loose all xml attributes if any and all listings are incorrectly handled (numeric keys)
-//     * @param \SimpleXMLElement|array $xmlObject
-//     * @param array $out
-//     * @return array
-//     */
-//    private function xml2array($xmlObject, $out = array())
-//    {
-//        foreach ((array) $xmlObject as $index => $node) {
-//            $out[$index] = (is_object($node) || is_array($node)) ? $this->xml2array($node) : $node;
-//        }
-//
-//        return $out;
-//    }
+    /**
+     * @param string $value
+     * @return array
+     */
+    private function decodeJson($value)
+    {
+        $data = json_decode($value, true);
+
+        if ($data === false) {
+            $error = json_last_error();
+
+            if ($error !== JSON_ERROR_NONE) {
+                $message = json_last_error_msg();
+
+                if ($message === false) {
+                    $message = 'Unknown error';
+                }
+
+                throw new Exception\RuntimeException(
+                    sprintf('Unable to decode JSON: %s', $message)
+                );
+            }
+        }
+
+        return $data;
+    }
 }

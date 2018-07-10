@@ -2,28 +2,24 @@
 
 namespace Denner\Client\Response;
 
-use GuzzleHttp\Command\Event\ProcessEvent;
 use GuzzleHttp\Command\Guzzle\Operation;
-use GuzzleHttp\Message\ResponseInterface as HttpResponseInterface;
+use GuzzleHttp\Psr7\Response as PsrResponse;
 
 class ResourceResponse extends BaseResponse
 {
     /**
-     * @param Operation $operation
-     * @param ProcessEvent $event
-     * @return ResponseInterface
+     * @var \Denner\Client\Response\Resource
      */
-    public static function fromOperation(Operation $operation, ProcessEvent $event)
-    {
-        return new static($event->getResponse());
-    }
+    protected $resource;
 
     /**
-     * @param HttpResponseInterface $response
+     * @param Operation $operation
+     * @param PsrResponse $response
+     * @return ResourceResponse
      */
-    public function __construct(HttpResponseInterface $response)
+    public static function fromOperation(Operation $operation, PsrResponse $response)
     {
-        parent::__construct($response);
+        return new static($response);
     }
 
     /**
@@ -31,6 +27,10 @@ class ResourceResponse extends BaseResponse
      */
     public function getResource()
     {
-        return new Resource($this->getData());
+        if ($this->resource === null) {
+            $this->resource = new Resource($this->getData());
+        }
+
+        return $this->resource;
     }
 }

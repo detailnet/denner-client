@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'base_url' => 'http://denner-assets.public.web01.detailnet.me/api/'
+    'base_uri' => 'http://denner-assets.public.web02.detailnet.me/api/'
 ];

@@ -17,7 +17,7 @@ $token = $response->getResource()->get('response');
 
 var_dump('Token:', $token);
 
-$url = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
+$url = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
 
 $operations = [
     'listProducts'       => sprintf('?token=%s', $token),

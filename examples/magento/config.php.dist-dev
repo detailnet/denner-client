@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'base_url' => 'https://shop-admin-test.denner.ch/rest/',
-    'username' => 'detailnet_api',
-    'password' => 'advandoo.com_2017',
+    'base_uri' => 'https://shop-admin-test.denner.ch/rest/',
+    'username' => 'your-username',
+    'password' => 'your-password',
 ];

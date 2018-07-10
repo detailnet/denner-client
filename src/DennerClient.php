@@ -5,17 +5,14 @@ namespace Denner\Client;
 use ReflectionClass;
 
 use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\ClientInterface as HttpClientInterface;
 use GuzzleHttp\Command\Guzzle\Description as ServiceDescription;
-use GuzzleHttp\Command\Guzzle\DescriptionInterface as ServiceDescriptionInterface;
 use GuzzleHttp\Command\Guzzle\GuzzleClient as ServiceClient;
 
 use Denner\Client\Exception;
-use Denner\Client\Subscriber;
 
 abstract class DennerClient extends ServiceClient
 {
-    const CLIENT_VERSION = '2.0.0';
+    const CLIENT_VERSION = '3.0.0';
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
@@ -29,7 +26,7 @@ abstract class DennerClient extends ServiceClient
      */
     public static function factory($options = [])
     {
-//        $requiredOptions = array();
+//        $requiredOptions = [];
 //
 //        foreach ($requiredOptions as $optionName) {
 //            if (!isset($options[$optionName]) || $options[$optionName] === '') {
@@ -41,15 +38,13 @@ abstract class DennerClient extends ServiceClient
 
         // These are applied if not otherwise specified
         $defaultOptions = [
-            'base_url' => self::getDefaultServiceUrl(),
-            'defaults' => [
-                // Float describing the number of seconds to wait while trying to connect to a server.
-                // 0 was the default (wait indefinitely).
-                'connect_timeout' => 10,
-                // Float describing the timeout of the request in seconds.
-                // 0 was the default (wait indefinitely).
-                'timeout' => 60, // 60 seconds, may be overridden by individual operations
-            ],
+            'base_uri' => self::getDefaultServiceUrl(),
+            // Float describing the number of seconds to wait while trying to connect to a server.
+            // 0 was the default (wait indefinitely).
+            'connect_timeout' => 10,
+            // Float describing the timeout of the request in seconds.
+            // 0 was the default (wait indefinitely).
+            'timeout' => 60, // 60 seconds, may be overridden by individual operations
         ];
 
         $headers = [
@@ -67,19 +62,17 @@ abstract class DennerClient extends ServiceClient
 
         // These are always applied
         $overrideOptions = [
-            'defaults' => [
-                // We're using our own error handler
-                // (this disables the use of the internal HttpError subscriber)
-                'exceptions' => false,
-                'headers' => $headers,
-            ],
+            // We're using our own error handling middleware,
+            // so disable throwing exceptions on HTTP protocol errors (i.e., 4xx and 5xx responses).
+            'http_errors' => false,
+            'headers' => $headers,
         ];
 
         // Apply options
         $config = array_replace_recursive($defaultOptions, $options, $overrideOptions);
 
         $httpClient = new HttpClient($config);
-        $httpClient->getEmitter()->attach(new Subscriber\Http\ProcessError());
+//        $httpClient->getEmitter()->attach(new Subscriber\Http\ProcessError());
 
         $serviceDescriptionFile = __DIR__ . sprintf('/ServiceDescription/%s.php', self::getServiceDescriptionName());
 
@@ -90,28 +83,10 @@ abstract class DennerClient extends ServiceClient
         }
 
         $description = new ServiceDescription(require $serviceDescriptionFile);
-        $client = new static($httpClient, $description);
+        $deserializer = new Deserializer($description);
+        $client = new static($httpClient, $description, null, $deserializer);
 
         return $client;
-    }
-
-    /**
-     * @param HttpClientInterface $client
-     * @param ServiceDescriptionInterface $description
-     */
-    public function __construct(
-        HttpClientInterface $client,
-        ServiceDescriptionInterface $description
-    ) {
-        $config = [
-            'process' => false, // Don't use Guzzle Service's processing (we're rolling our own...)
-        ];
-
-        parent::__construct($client, $description, $config);
-
-        $emitter = $this->getEmitter();
-        $emitter->attach(new Subscriber\Command\PrepareRequest($description));
-        $emitter->attach(new Subscriber\Command\ProcessResponse($description));
     }
 
     /**
@@ -135,7 +110,7 @@ abstract class DennerClient extends ServiceClient
      */
     public function getServiceUrl()
     {
-        return $this->getHttpClient()->getBaseUrl();
+        return $this->getHttpClient()->getConfig('base_uri');
     }
 
     /**
@@ -201,21 +176,21 @@ abstract class DennerClient extends ServiceClient
         $params['filter'] = $filters;
     }
 
-    /**
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public function __call($method, array $args)
-    {
-        // It seems we can't intercept Guzzle's request exceptions through the event system...
-        // e.g. when the endpoint is unreachable or the request times out.
-        try {
-            return parent::__call($method, $args);
-        } catch (\Exception $e) {
-            throw Exception\OperationException::wrapException($e);
-        }
-    }
+//    /**
+//     * @param string $method
+//     * @param array $args
+//     * @return mixed
+//     */
+//    public function __call($method, array $args)
+//    {
+//        // It seems we can't intercept Guzzle's request exceptions through the event system...
+//        // e.g. when the endpoint is unreachable or the request times out.
+//        try {
+//            return parent::__call($method, $args);
+//        } catch (\Exception $e) {
+//            throw Exception\OperationException::wrapException($e);
+//        }
+//    }
 
     /**
      * @param string $option
@@ -223,7 +198,7 @@ abstract class DennerClient extends ServiceClient
      */
     protected function getHeaderOption($option)
     {
-        $headers = $this->getHttpClient()->getDefaultOption('headers');
+        $headers = $this->getHttpClient()->getConfig('headers');
 
         return array_key_exists($option, $headers) ? $headers[$option] : null;
     }

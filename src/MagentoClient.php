@@ -3,7 +3,6 @@
 namespace Denner\Client;
 
 use Denner\Client\Response;
-use Denner\Client\Subscriber;
 
 /**
  * Magento 2 API client.
