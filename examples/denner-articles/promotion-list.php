@@ -49,9 +49,6 @@ $response->getResources();
 // Get item count
 $response->getResourceCount();
 
-// or just
-$response->count();
-
 // When the listing has multiple pages:
 // Get total item count
 $response->getTotalResourceCount();

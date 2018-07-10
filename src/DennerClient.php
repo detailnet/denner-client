@@ -20,11 +20,7 @@ abstract class DennerClient extends ServiceClient
     const HEADER_APP_ID  = 'App-ID';
     const HEADER_APP_KEY = 'App-Key';
 
-    /**
-     * @param array $options
-     * @return static
-     */
-    public static function factory($options = [])
+    public static function factory(array $options = []): DennerClient
     {
 //        $requiredOptions = [];
 //
@@ -89,63 +85,19 @@ abstract class DennerClient extends ServiceClient
         return $client;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getServiceAppId()
+    public function getServiceAppId(): ?string
     {
         return $this->getHeaderOption(self::HEADER_APP_ID);
     }
 
-    /**
-     * @return string|null
-     */
-    public function getServiceAppKey()
+    public function getServiceAppKey(): ?string
     {
         return $this->getHeaderOption(self::HEADER_APP_KEY);
     }
 
-    /**
-     * @return string
-     */
-    public function getServiceUrl()
+    public function getServiceUrl(): string
     {
         return $this->getHttpClient()->getConfig('base_uri');
-    }
-
-    /**
-     * @return string
-     */
-    protected static function getDefaultServiceUrl()
-    {
-        $serviceName = self::getServiceName();
-
-        return sprintf('https://denner-%s.detailnet.ch/api/', $serviceName);
-    }
-
-    /**
-     * @param boolean $asSnake
-     * @return string
-     */
-    protected static function getServiceName($asSnake = true)
-    {
-        $className = (new ReflectionClass(static::CLASS))->getShortName();
-        $serviceName = str_replace('Client', '', $className);
-
-        if ($asSnake !== false) {
-            $serviceName = ltrim(strtolower(preg_replace('/[A-Z]/', '-$0', $serviceName)), '-');
-            $serviceName = preg_replace('/[-]+/', '-', $serviceName);
-        }
-
-        return $serviceName;
-    }
-
-    /**
-     * @return string
-     */
-    protected static function getServiceDescriptionName()
-    {
-        return self::getServiceName(false);
     }
 
     /**
@@ -176,27 +128,35 @@ abstract class DennerClient extends ServiceClient
         $params['filter'] = $filters;
     }
 
-//    /**
-//     * @param string $method
-//     * @param array $args
-//     * @return mixed
-//     */
-//    public function __call($method, array $args)
-//    {
-//        // It seems we can't intercept Guzzle's request exceptions through the event system...
-//        // e.g. when the endpoint is unreachable or the request times out.
-//        try {
-//            return parent::__call($method, $args);
-//        } catch (\Exception $e) {
-//            throw Exception\OperationException::wrapException($e);
-//        }
-//    }
+    private static function getDefaultServiceUrl(): string
+    {
+        $serviceName = self::getServiceName();
+
+        return sprintf('https://denner-%s.detailnet.ch/api/', $serviceName);
+    }
+
+    private static function getServiceName(bool $asSnake = true): string
+    {
+        $className = (new ReflectionClass(static::CLASS))->getShortName();
+        $serviceName = str_replace('Client', '', $className);
+
+        if ($asSnake !== false) {
+            $serviceName = ltrim(strtolower(preg_replace('/[A-Z]/', '-$0', $serviceName)), '-');
+            $serviceName = preg_replace('/[-]+/', '-', $serviceName);
+        }
+
+        return $serviceName;
+    }
 
     /**
-     * @param string $option
-     * @return string|null
+     * @return string
      */
-    protected function getHeaderOption($option)
+    private static function getServiceDescriptionName(): string
+    {
+        return self::getServiceName(false);
+    }
+
+    private function getHeaderOption(string $option): ?string
     {
         $headers = $this->getHttpClient()->getConfig('headers');
 

@@ -8,12 +8,13 @@ use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Psr7\Response as PsrResponse;
 
 use Denner\Client\Exception;
+use Denner\Client\Response\Resource as ClientResource;
 
 class ListResponse extends BaseResponse implements
     \IteratorAggregate
 {
     /**
-     * @var Resource[]
+     * @var ClientResource[]
      */
     protected $resources = [];
 
@@ -27,7 +28,7 @@ class ListResponse extends BaseResponse implements
      * @param PsrResponse $response
      * @return ListResponse
      */
-    public static function fromOperation(Operation $operation, PsrResponse $response)
+    public static function fromOperation(Operation $operation, PsrResponse $response): Response
     {
         $operationConfig = $operation->toArray();
 
@@ -43,11 +44,7 @@ class ListResponse extends BaseResponse implements
         return new static($response, $operationConfig['responseDataRoot']);
     }
 
-    /**
-     * @param PsrResponse $response
-     * @param string $dataRoot
-     */
-    public function __construct(PsrResponse $response, $dataRoot)
+    public function __construct(PsrResponse $response, string $dataRoot)
     {
         parent::__construct($response);
 
@@ -59,9 +56,9 @@ class ListResponse extends BaseResponse implements
     }
 
     /**
-     * @return Resource[]
+     * @return ClientResource[]
      */
-    public function getResources()
+    public function getResources(): array
     {
         return $this->resources;
     }
@@ -69,9 +66,9 @@ class ListResponse extends BaseResponse implements
     /**
      * Count resources on current page
      *
-     * @return integer
+     * @return int
      */
-    public function getResourceCount()
+    public function getResourceCount(): int
     {
         return count($this->getResources());
     }
@@ -81,7 +78,7 @@ class ListResponse extends BaseResponse implements
      *
      * @return integer|null
      */
-    public function getTotalResourceCount()
+    public function getTotalResourceCount(): ?int
     {
         return isset($this->getData()['total_items']) ? (integer) $this->getData()['total_items'] : null;
     }
@@ -91,7 +88,7 @@ class ListResponse extends BaseResponse implements
      *
      * @return integer|null
      */
-    public function getPageCount()
+    public function getPageCount(): ?int
     {
         return isset($this->getData()['page_count']) ? (integer) $this->getData()['page_count'] : null;
     }
@@ -101,23 +98,17 @@ class ListResponse extends BaseResponse implements
      *
      * @return integer|null
      */
-    public function getPageSize()
+    public function getPageSize(): ?int
     {
         return isset($this->getData()['page_size']) ? (integer) $this->getData()['page_size'] : null;
     }
 
-    /**
-     * @return ArrayIterator
-     */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->getResources());
     }
 
-    /**
-     * @return array
-     */
-    private function getRawResources()
+    private function getRawResources(): array
     {
         $data = $this->getData();
 

@@ -17,45 +17,30 @@ abstract class BaseResponse implements
     /**
      * @var array
      */
-    protected $data;
+    protected $data = [];
 
-    /**
-     * @param PsrResponse $response
-     */
     public function __construct(PsrResponse $response)
     {
         $this->response = $response;
         $this->data = $this->extractData();
     }
 
-    /**
-     * @return PsrResponse
-     */
-    public function getHttpResponse()
+    public function getHttpResponse(): PsrResponse
     {
         return $this->response;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->getData();
     }
 
-    /**
-     * @return array
-     */
-    protected function getData()
+    protected function getData(): array
     {
         return $this->data;
     }
 
-    /**
-     * @return array
-     */
-    protected function extractData()
+    protected function extractData(): array
     {
         try {
             $data = $this->decodeJson($this->getHttpResponse()->getBody());
@@ -70,11 +55,7 @@ abstract class BaseResponse implements
         }
     }
 
-    /**
-     * @param string $value
-     * @return array
-     */
-    private function decodeJson($value)
+    private function decodeJson(string $value): array
     {
         $data = json_decode($value, true);
 

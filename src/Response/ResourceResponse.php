@@ -5,10 +5,12 @@ namespace Denner\Client\Response;
 use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Psr7\Response as PsrResponse;
 
+use Denner\Client\Response\Resource as ClientResource;
+
 class ResourceResponse extends BaseResponse
 {
     /**
-     * @var \Denner\Client\Response\Resource
+     * @var ClientResource
      */
     protected $resource;
 
@@ -17,18 +19,15 @@ class ResourceResponse extends BaseResponse
      * @param PsrResponse $response
      * @return ResourceResponse
      */
-    public static function fromOperation(Operation $operation, PsrResponse $response)
+    public static function fromOperation(Operation $operation, PsrResponse $response): Response
     {
         return new static($response);
     }
 
-    /**
-     * @return \Denner\Client\Response\Resource
-     */
-    public function getResource()
+    public function getResource(): ClientResource
     {
         if ($this->resource === null) {
-            $this->resource = new Resource($this->getData());
+            $this->resource = new ClientResource($this->getData());
         }
 
         return $this->resource;

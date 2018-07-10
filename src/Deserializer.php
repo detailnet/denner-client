@@ -17,21 +17,12 @@ class Deserializer
      */
     protected $description;
 
-    /**
-     * @param ServiceDescription $description
-     */
     public function __construct(ServiceDescription $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @param PsrResponse $response
-     * @param PsrRequest|null $request
-     * @param CommandInterface $command
-     * @return Response|null
-     */
-    public function __invoke(PsrResponse $response, PsrRequest $request, CommandInterface $command)
+    public function __invoke(PsrResponse $response, PsrRequest $request, CommandInterface $command): ?Response
     {
         // No exception for Not Found errors
         if ($response->getStatusCode() == 404) {

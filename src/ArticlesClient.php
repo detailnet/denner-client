@@ -7,6 +7,7 @@ use Denner\Client\Response;
 /**
  * Denner Articles Service client.
  *
+ * @method static ArticlesClient factory(array $options = [])
  * @method Response\ListResponse listAdvertisedArticles(array $params = [])
  * @method Response\ResourceResponse fetchAdvertisedArticle(array $params = [])
  * @method Response\ResourceResponse updateAdvertisedArticle(array $params = [])
@@ -17,13 +18,7 @@ use Denner\Client\Response;
  */
 class ArticlesClient extends DennerClient
 {
-    /**
-     * @param integer $year
-     * @param integer $week
-     * @param array $params
-     * @return Response\ListResponse
-     */
-    public function listPromotionsByWeek($year, $week, array $params = [])
+    public function listPromotionsByWeek(int $year, int $week, array $params = []): Response\ListResponse
     {
         $filters = [
             'year' => ['property' => 'year', 'value' => $year, 'operator' => '=', 'type' => 'integer'],
@@ -36,13 +31,7 @@ class ArticlesClient extends DennerClient
         return $this->listPromotions($params);
     }
 
-    /**
-     * @param integer $year
-     * @param integer $week
-     * @param array $params
-     * @return Response\ListResponse
-     */
-    public function listAdvertisedArticlesByWeek($year, $week, array $params = [])
+    public function listAdvertisedArticlesByWeek(int $year, int $week, array $params = []): Response\ListResponse
     {
         $filters = [
             'year' => ['property' => 'year', 'value' => $year, 'operator' => '=', 'type' => 'integer'],
@@ -55,15 +44,15 @@ class ArticlesClient extends DennerClient
         return $this->listAdvertisedArticles($params);
     }
 
-    /**
-     * @param string $promotionId
-     * @param array $params
-     * @return Response\ListResponse
-     */
-    public function listAdvertisedArticlesByPromotion($promotionId, array $params = [])
+    public function listAdvertisedArticlesByPromotion(string $promotionId, array $params = []): Response\ListResponse
     {
         $filters = [
-            'promotion.id' => ['property' => 'promotion.id', 'value' => $promotionId, 'operator' => '=', 'type' => 'string'],
+            'promotion.id' => [
+                'property' => 'promotion.id',
+                'value' => $promotionId,
+                'operator' => '=',
+                'type' => 'string',
+            ],
         ];
 
         // We may need to replace an already existing filter

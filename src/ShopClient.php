@@ -7,6 +7,7 @@ use Denner\Client\Response;
 /**
  * Denner Shop API client.
  *
+ * @method static ShopClient factory(array $options = [])
  * @method Response\ResourceResponse createSweepstakeParticipant(array $params = [])
  * @method Response\ResourceResponse createWineAppraisalVote(array $params = [])
  * @method Response\ResourceResponse createWineAppraisal(array $params = [])

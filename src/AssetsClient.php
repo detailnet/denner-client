@@ -7,6 +7,7 @@ use Denner\Client\Response;
 /**
  * Denner Assets Service client.
  *
+ * @method static AssetsClient factory(array $options = [])
  * @method Response\ListResponse listAssets(array $params = [])
  * @method Response\ResourceResponse fetchAsset(array $params = [])
  * @method Response\ListResponse listAssetCollections(array $params = [])
@@ -14,15 +15,15 @@ use Denner\Client\Response;
  */
 class AssetsClient extends DennerClient
 {
-    /**
-     * @param string $urlToken
-     * @param array $params
-     * @return Response\ListResponse
-     */
-    public function listAssetCollectionsByUrlToken($urlToken, array $params = [])
+    public function listAssetCollectionsByUrlToken(string $urlToken, array $params = []): Response\ListResponse
     {
         $filters = [
-            'url_token' => ['property' => 'links.url_token', 'value' => $urlToken, 'operator' => '=', 'type' => 'string'],
+            'url_token' => [
+                'property' => 'links.url_token',
+                'value' => $urlToken,
+                'operator' => '=',
+                'type' => 'string',
+            ],
         ];
 
         // We may need to replace already existing filters

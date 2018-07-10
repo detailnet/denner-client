@@ -7,20 +7,9 @@ use GuzzleHttp\Psr7\Response as PsrResponse;
 
 interface Response
 {
-    /**
-     * @param Operation $operation
-     * @param PsrResponse $response
-     * @return Response
-     */
-    public static function fromOperation(Operation $operation, PsrResponse $response);
+    public static function fromOperation(Operation $operation, PsrResponse $response): Response;
 
-    /**
-     * @return PsrResponse
-     */
-    public function getHttpResponse();
+    public function getHttpResponse(): PsrResponse;
 
-    /**
-     * @return array
-     */
-    public function toArray();
+    public function toArray(): array;
 }
