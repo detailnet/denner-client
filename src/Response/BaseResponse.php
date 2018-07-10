@@ -58,7 +58,7 @@ abstract class BaseResponse implements
 //                case 'application/json; charset=utf-8':
 //                case 'application/json':
 //                default:
-                    $data = $this->getHttpResponse()->json() ?: array();
+                    $data = $this->getHttpResponse()->json() ?: [];
 //                    break;
 //            }
         } catch (GuzzleHttpException\ParseException $e) {

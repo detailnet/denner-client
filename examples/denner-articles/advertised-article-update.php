@@ -10,10 +10,10 @@ if (!$advertisedArticleId) {
     throw new RuntimeException('Missing or invalid parameter "advertised_article_id"');
 }
 
-$params = array(
+$params = [
     'advertised_article_id' => $advertisedArticleId,
     'manuscript_notes' => 'This is a test',
-);
+];
 
 $client = ArticlesClient::factory($config);
 

@@ -2,250 +2,250 @@
 
 use Denner\Client\Response;
 
-return array(
+return [
     'name' => 'Denner Articles Service',
-    'operations' => array(
+    'operations' => [
         // Advertised articles
-        'listAdvertisedArticles' => array(
+        'listAdvertisedArticles' => [
             'httpMethod' => 'GET',
             'uri' => 'advertised-articles',
             'summary' => 'List advertised articles',
-            'parameters' => array(
-                'page' => array(
+            'parameters' => [
+                'page' => [
                     '$ref' => 'PageParam',
-                ),
-                'page_size' => array(
+                ],
+                'page_size' => [
                     '$ref' => 'PageSizeParam',
-                ),
+                ],
 //                'query' => array(
 //                    'description' => 'Full text search query (currently searches only in advertised article name)',
 //                    'location' => 'query',
 //                    'type' => 'string',
 //                    'required' => false,
 //                ),
-                'filter' => array(
+                'filter' => [
                     '$ref' => 'FilterParam',
-                ),
-                'sort' => array(
+                ],
+                'sort' => [
                     '$ref' => 'SortParam',
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'advertised_articles',
-        ),
-        'fetchAdvertisedArticle' => array(
+        ],
+        'fetchAdvertisedArticle' => [
             'httpMethod' => 'GET',
             'uri' => 'advertised-articles/{advertised_article_id}',
             'summary' => 'Fetch an advertisedArticle',
-            'parameters' => array(
-                'advertised_article_id' => array(
+            'parameters' => [
+                'advertised_article_id' => [
                     'description' => 'The ID of the advertised article to fetch',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'broadcast_actions' => array(
+                ],
+                'broadcast_actions' => [
                     'description' => 'Request for broadcast',
                     'location' => 'header',
                     'sentAs' => 'X-Denner-Broadcast',
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ResourceResponse::CLASS,
-        ),
-        'updateAdvertisedArticle' => array(
+        ],
+        'updateAdvertisedArticle' => [
             'httpMethod' => 'PATCH',
             'uri' => 'advertised-articles/{advertised_article_id}',
             'summary' => 'Update an advertisedArticle',
-            'parameters' => array(
-                'advertised_article_id' => array(
+            'parameters' => [
+                'advertised_article_id' => [
                     'description' => 'The ID of the advertised article to update',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ),
-            ),
-            'additionalParameters' => array(
+                ],
+            ],
+            'additionalParameters' => [
                 'location' => 'json',
-            ),
+            ],
             'responseClass' => Response\ResourceResponse::CLASS,
-        ),
+        ],
         // Articles
-        'fetchArticle' => array(
+        'fetchArticle' => [
             'httpMethod' => 'GET',
             'uri' => 'articles/{article_id}',
             'summary' => 'Fetch an article',
-            'parameters' => array(
-                'article_id' => array(
+            'parameters' => [
+                'article_id' => [
                     'description' => 'The ID of the article to fetch',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'quantity' => array(
+                ],
+                'quantity' => [
                     'description' => 'Quantity (for texts and price)',
                     'location' => 'query',
                     'required' => false,
                     'type' => 'integer',
-                ),
-                'price-selection' => array(
+                ],
+                'price-selection' => [
                     '$ref' => 'PriceSelectionParam',
-                ),
-                'broadcast_actions' => array(
+                ],
+                'broadcast_actions' => [
                     'description' => 'Request for broadcast',
                     'location' => 'header',
                     'sentAs' => 'X-Denner-Broadcast',
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ResourceResponse::CLASS,
-        ),
+        ],
         // Languages
-        'listLanguages' => array(
+        'listLanguages' => [
             'httpMethod' => 'GET',
             'uri' => 'languages',
             'summary' => 'List languages',
-            'parameters' => array(
-                'page' => array(
+            'parameters' => [
+                'page' => [
                     '$ref' => 'PageParam',
-                ),
-                'page_size' => array(
+                ],
+                'page_size' => [
                     '$ref' => 'PageSizeParam',
-                ),
+                ],
 //                ),
-                'filter' => array(
+                'filter' => [
                     '$ref' => 'FilterParam',
-                ),
-                'sort' => array(
+                ],
+                'sort' => [
                     '$ref' => 'SortParam',
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'languages',
-        ),
+        ],
         // Promotions
-        'listPromotions' => array(
+        'listPromotions' => [
             'httpMethod' => 'GET',
             'uri' => 'promotions',
             'summary' => 'List promotions',
-            'parameters' => array(
-                'page' => array(
+            'parameters' => [
+                'page' => [
                     '$ref' => 'PageParam',
-                ),
-                'page_size' => array(
+                ],
+                'page_size' => [
                     '$ref' => 'PageSizeParam',
-                ),
-                'filter' => array(
+                ],
+                'filter' => [
                     '$ref' => 'FilterParam',
-                ),
-                'sort' => array(
+                ],
+                'sort' => [
                     '$ref' => 'SortParam',
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ListResponse::CLASS,
             'responseDataRoot' => 'promotions',
-        ),
-    ),
-    'models' => array(
-        'PageParam' => array(
+        ],
+    ],
+    'models' => [
+        'PageParam' => [
             'description' => 'The number of the page',
             'location' => 'query',
             'type' => 'integer',
             'required' => false,
-        ),
-        'PageSizeParam' => array(
+        ],
+        'PageSizeParam' => [
             'description' => 'The number of items to list on a page',
             'location' => 'query',
             'type' => 'integer',
             'required' => false,
-        ),
-        'Filter' => array(
+        ],
+        'Filter' => [
             'type' => 'object',
-            'properties' => array(
-                'property' => array(
+            'properties' => [
+                'property' => [
                     'description' => 'The property to filter against',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'value' => array(
+                ],
+                'value' => [
                     'description' => 'The value to filter against',
-                    'type' => array('array', 'string', 'integer', 'boolean', 'number', 'numeric', 'object'),
+                    'type' => ['array', 'string', 'integer', 'boolean', 'number', 'numeric', 'object'],
                     'required' => true,
-                ),
-                'operator' => array(
+                ],
+                'operator' => [
                     'description' => 'The operator the use for filtering',
                     'type' => 'string',
                     'required' => false,
-                ),
-                'type' => array(
+                ],
+                'type' => [
                     'description' => 'The data type of the value',
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
-        ),
-        'FilterParam' => array(
+                ],
+            ],
+        ],
+        'FilterParam' => [
             'description' => 'An array of filters',
             'location' => 'query',
             'type' => 'array',
             'required' => false,
-            'items' => array(
+            'items' => [
                 '$ref' => 'Filter',
-            ),
-        ),
-        'Sort' => array(
+            ],
+        ],
+        'Sort' => [
             'type' => 'object',
-            'properties' => array(
-                'property' => array(
+            'properties' => [
+                'property' => [
                     'description' => 'The property use for sorting',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'direction' => array(
+                ],
+                'direction' => [
                     'description' => 'The sorting direction (either "asc" or "desc")',
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
-        ),
-        'SortParam' => array(
+                ],
+            ],
+        ],
+        'SortParam' => [
             'description' => 'An array of sorters',
             'location' => 'query',
             'type' => 'array',
             'required' => false,
-            'items' => array(
+            'items' => [
                 '$ref' => 'Sort',
-            ),
-        ),
-        'PriceSelectionParam' => array(
+            ],
+        ],
+        'PriceSelectionParam' => [
             'description' => 'Price selection',
             'location' => 'query',
             'required' => false,
             'type' => 'object',
-            'properties' => array(
-                'valid_on' => array(
+            'properties' => [
+                'valid_on' => [
                     'description' => 'Price for day (Default "today")',
                     'type' => 'string',
                     'required' => false,
-                ),
-                'level' => array(
+                ],
+                'level' => [
                     'description' => 'Price level',
                     'type' => 'integer',
                     'required' => true,
-                ),
-                'channel' => array(
+                ],
+                'channel' => [
                     'description' => 'Price channel',
                     'type' => 'integer',
                     'required' => false,
-                ),
-                'price_region' => array(
+                ],
+                'price_region' => [
                     'description' => 'Price region',
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

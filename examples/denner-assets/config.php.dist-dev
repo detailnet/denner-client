@@ -1,5 +1,5 @@
 <?php
 
-return array(
+return [
     'base_url' => 'http://denner-assets.public.web01.detailnet.me/api/'
-);
+];

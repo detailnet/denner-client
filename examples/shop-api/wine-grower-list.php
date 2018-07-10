@@ -3,7 +3,7 @@
 use Denner\Client\ShopClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
+$params = [];
 
 // Example: ?page=2
 if (isset($_GET['page'])) {

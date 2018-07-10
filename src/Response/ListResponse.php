@@ -52,7 +52,7 @@ class ListResponse extends BaseResponse
      */
     public function getResources()
     {
-        $resources = array();
+        $resources = [];
 
         foreach ($this->getRawResources() as $resource) {
             $resources[] = new Resource($resource);

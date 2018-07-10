@@ -47,8 +47,8 @@ class PlainTextResponse extends BaseResponse
      */
     protected function getData()
     {
-        return array(
+        return [
             'response' => substr($this->getHttpResponse()->getBody()->getContents(), 1, -1),
-        );
+        ];
     }
 }

@@ -13,41 +13,41 @@ if (!$token) {
 }
 
 $response = $client->listProducts(
-    array(
+    [
         'Authorization' => sprintf('Bearer %s', $token),
-        'searchCriteria' => array(
-            'filterGroups' => array( // FilterGroups are connected with AND
-                array(
-                    'filters' => array( // Filters are connected with OR
-                        array(
+        'searchCriteria' => [
+            'filterGroups' => [ // FilterGroups are connected with AND
+                [
+                    'filters' => [ // Filters are connected with OR
+                        [
                             'field' => 'status',
                             'conditionType' => 'eq',
                             'value' => '1', // 1 = online, other are offline
-                        ),
-                    ),
-                ),
-                array(
-                    'filters' => array(
-                        array(
+                        ],
+                    ],
+                ],
+                [
+                    'filters' => [
+                        [
                             'field' => 'visibility',
                             'conditionType' => 'eq',
                             'value' => '4', // 4 = visible in the shop
-                        )
-                    )
-                ),
-                array(
-                    'filters' => array(
-                        array(
+                        ]
+                    ]
+                ],
+                [
+                    'filters' => [
+                        [
                             'field' => 'attribute_set_id',
                             'conditionType' => 'eq',
                             'value' => '9', // 9 = wine, there might be banners too
-                        )
-                    )
-                ),
-            ),
+                        ]
+                    ]
+                ],
+            ],
             'pageSize' => '5',
-        ),
-    )
+        ],
+    ]
 );
 
 var_dump($response->getResource());

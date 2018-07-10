@@ -10,9 +10,9 @@ if (!$wineId) {
     throw new RuntimeException('Missing or invalid parameter "wine_id"');
 }
 
-$params = array(
+$params = [
     'wine_id' => $wineId,
-);
+];
 
 // Example: ?page=2
 if (isset($_GET['page'])) {

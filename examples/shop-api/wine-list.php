@@ -3,7 +3,7 @@
 use Denner\Client\ShopClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
+$params = [];
 
 // Example: ?page=2
 if (isset($_GET['page'])) {
@@ -16,12 +16,12 @@ if (isset($_GET['page_size'])) {
 }
 
 $params['sort'] = json_encode(
-    array(
-        array(
+    [
+        [
             'property' => 'id',
             'direction' => 'asc',
-        ),
-    )
+        ],
+    ]
 );
 
 $client = ShopClient::factory($config);

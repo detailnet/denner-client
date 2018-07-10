@@ -27,7 +27,7 @@ abstract class DennerClient extends ServiceClient
      * @param array $options
      * @return static
      */
-    public static function factory($options = array())
+    public static function factory($options = [])
     {
 //        $requiredOptions = array();
 //
@@ -40,22 +40,22 @@ abstract class DennerClient extends ServiceClient
 //        }
 
         // These are applied if not otherwise specified
-        $defaultOptions = array(
+        $defaultOptions = [
             'base_url' => self::getDefaultServiceUrl(),
-            'defaults' => array(
+            'defaults' => [
                 // Float describing the number of seconds to wait while trying to connect to a server.
                 // 0 was the default (wait indefinitely).
                 'connect_timeout' => 10,
                 // Float describing the timeout of the request in seconds.
                 // 0 was the default (wait indefinitely).
                 'timeout' => 60, // 60 seconds, may be overridden by individual operations
-            ),
-        );
+            ],
+        ];
 
-        $headers = array(
+        $headers = [
             'Accept' => 'application/json',
             'User-Agent' => 'denner-client/' . self::CLIENT_VERSION,
-        );
+        ];
 
         if (isset($options[self::OPTION_APP_ID])) {
             $headers[self::HEADER_APP_ID] = $options[self::OPTION_APP_ID];
@@ -66,14 +66,14 @@ abstract class DennerClient extends ServiceClient
         }
 
         // These are always applied
-        $overrideOptions = array(
-            'defaults' => array(
+        $overrideOptions = [
+            'defaults' => [
                 // We're using our own error handler
                 // (this disables the use of the internal HttpError subscriber)
                 'exceptions' => false,
                 'headers' => $headers,
-            ),
-        );
+            ],
+        ];
 
         // Apply options
         $config = array_replace_recursive($defaultOptions, $options, $overrideOptions);
@@ -103,9 +103,9 @@ abstract class DennerClient extends ServiceClient
         HttpClientInterface $client,
         ServiceDescriptionInterface $description
     ) {
-        $config = array(
+        $config = [
             'process' => false, // Don't use Guzzle Service's processing (we're rolling our own...)
-        );
+        ];
 
         parent::__construct($client, $description, $config);
 
@@ -181,7 +181,7 @@ abstract class DennerClient extends ServiceClient
     {
         // We may need to replace already existing filters
         if (isset($params['filter']) && is_array($params['filter'])) {
-            $filters = array();
+            $filters = [];
 
             foreach ($params['filter'] as $filter) {
                 if (isset($filter['property']) && isset($filtersToAdd[$filter['property']])) {

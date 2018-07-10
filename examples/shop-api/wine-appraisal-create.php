@@ -10,7 +10,7 @@ if (!$wineId) {
     throw new RuntimeException('Missing or invalid parameter "wine_id"');
 }
 
-$params = array(
+$params = [
     'wine_id' => $wineId,
     "wine_year" => 2013,
     "title" => "un très très bon vin",
@@ -19,7 +19,7 @@ $params = array(
     "display_name" => "Hans M.",
     "city" => "Cossonay",
     "language" => "fr",
-);
+];
 
 $client = ShopClient::factory($config);
 

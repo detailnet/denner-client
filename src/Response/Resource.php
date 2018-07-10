@@ -17,7 +17,7 @@ class Resource implements
     /**
      * @var array
      */
-    protected $data = array();
+    protected $data = [];
 
     /**
      * @param array $data

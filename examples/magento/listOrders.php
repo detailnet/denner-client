@@ -18,45 +18,45 @@ if (!$from) {
 }
 
 $response = $client->listOrders(
-    array(
+    [
         'Authorization' => sprintf('Bearer %s', $token),
-        'searchCriteria' => array(
-            'filterGroups' => array( // FilterGroups are connected with AND
-                array(
-                    'filters' => array( // Filters are connected with OR
-                        array(
+        'searchCriteria' => [
+            'filterGroups' => [ // FilterGroups are connected with AND
+                [
+                    'filters' => [ // Filters are connected with OR
+                        [
                             'field' => 'status',
                             'conditionType' => 'neq',
                             'value' => 'canceled',
-                        ),
-                    ),
-                ),
-                array(
-                    'filters' => array(
-                        array(
+                        ],
+                    ],
+                ],
+                [
+                    'filters' => [
+                        [
                             'field' => 'created_at',
                             'conditionType' => 'gt',
                             'value' => $from,
-                        )
-                    )
-                ),
-            ),
+                        ]
+                    ]
+                ],
+            ],
             'pageSize' => '5',
-        ),
-    )
+        ],
+    ]
 );
 
 var_dump($response->getResource());
 // echo '<pre>'; print_r($response->getResource()->get('items'));
 
-$orders = array();
+$orders = [];
 
 foreach ($response->getResource()->get('items') as $order)  {
     //var_dump($order);
-    $data = array(
+    $data = [
         'increment_id' => $order['increment_id'],
-        'items' => array(),
-    );
+        'items' => [],
+    ];
 
     foreach ($order['items'] as $item) {
         //var_dump($item);

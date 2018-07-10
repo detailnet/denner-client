@@ -16,12 +16,12 @@ if (!$appraisalId) {
     throw new RuntimeException('Missing or invalid parameter "appraisal_id"');
 }
 
-$params = array(
+$params = [
     'wine_id' => $wineId,
     'appraisal_id' => $appraisalId,
     'type' => $type,
     'shop_user_id' => 123456789,
-);
+];
 
 $client = ShopClient::factory($config);
 

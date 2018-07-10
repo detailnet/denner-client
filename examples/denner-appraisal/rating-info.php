@@ -12,6 +12,6 @@ if (!$articleId) {
 
 $client = AppraisalClient::factory($config);
 
-$response = $client->fetchRating(array('article_id' => $articleId));
+$response = $client->fetchRating(['article_id' => $articleId]);
 
 var_dump("Response:", $response, "Data:", $response->toArray());

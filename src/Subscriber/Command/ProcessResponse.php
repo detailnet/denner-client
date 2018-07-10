@@ -30,7 +30,7 @@ class ProcessResponse implements
      */
     public function getEvents()
     {
-        return array('process' => array('onProcess'));
+        return ['process' => ['onProcess']];
     }
 
     /**

@@ -2,198 +2,198 @@
 
 use Denner\Client\Response;
 
-return array(
+return [
     'name' => 'Magento Commerce for B2B 2.2',
-    'operations' => array(
-        'getToken' => array(
+    'operations' => [
+        'getToken' => [
             //'tag' => 'integrationAdminTokenServiceV1',
             'httpMethod' => 'POST',
             'uri' => 'V1/integration/admin/token',
             'summary' => 'Create access token for admin given the admin credentials.',
-            'parameters' => array(
-                'username' => array(
+            'parameters' => [
+                'username' => [
                     'location' => 'json',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'password' => array(
+                ],
+                'password' => [
                     'location' => 'json',
                     'type' => 'string',
                     'required' => true,
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\PlainTextResponse::CLASS,
-        ),
-        'listProducts' => array(
+        ],
+        'listProducts' => [
             //'tag' => 'catalogProductRepositoryV1',
             'httpMethod' => 'GET',
             'uri' => 'V1/products',
             'summary' => 'Get products that match specified search criteria.',
-            'parameters' => array(
-                'Authorization' => array(
+            'parameters' => [
+                'Authorization' => [
                     'location' => 'header',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'searchCriteria' =>  array(
+                ],
+                'searchCriteria' =>  [
                     '$ref' => 'SearchCriteriaParam',
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ResourceResponse::CLASS,
-        ),
-        'getProductStock' => array(
+        ],
+        'getProductStock' => [
             //'tag' => 'catalogInventoryStockRegistryV1',
             'httpMethod' => 'GET',
             'uri' => 'V1/stockStatuses/{productSku}',
             'summary' => 'Get stock status for a wine.',
-            'parameters' => array(
-                'productSku' => array(
+            'parameters' => [
+                'productSku' => [
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'Authorization' => array(
+                ],
+                'Authorization' => [
                     'location' => 'header',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'scopeId' =>  array(
+                ],
+                'scopeId' =>  [
                     'type' => 'number',
                     'required' => false,
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ResourceResponse::CLASS,
-        ),
-        'updateProductStock' => array(
+        ],
+        'updateProductStock' => [
             //'tag' => 'catalogInventoryStockRegistryV1',
             'httpMethod' => 'PUT',
             'uri' => 'V1/products/{productSku}/stockItems/{itemId}',
             'summary' => 'Update stock for a wine.',
-            'parameters' => array(
-                'productSku' => array(
+            'parameters' => [
+                'productSku' => [
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'itemId' => array(
+                ],
+                'itemId' => [
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'Authorization' => array(
+                ],
+                'Authorization' => [
                     'location' => 'header',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'stockItem' => array(
+                ],
+                'stockItem' => [
                     '$ref' => 'StockItemParam',
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\PlainTextResponse::CLASS,
-        ),
-        'listOrders' => array(
+        ],
+        'listOrders' => [
             //'tag' => 'salesOrderRepositoryV1',
             'httpMethod' => 'GET',
             'uri' => 'V1/orders',
             'summary' => 'Lists orders that match specified search criteria.',
-            'parameters' => array(
-                'Authorization' => array(
+            'parameters' => [
+                'Authorization' => [
                     'location' => 'header',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'searchCriteria' =>  array(
+                ],
+                'searchCriteria' =>  [
                     '$ref' => 'SearchCriteriaParam',
-                ),
-            ),
+                ],
+            ],
             'responseClass' => Response\ResourceResponse::CLASS,
-        ),
-    ),
-    'models' => array(
-        'SearchCriteriaParam' => array(
+        ],
+    ],
+    'models' => [
+        'SearchCriteriaParam' => [
             'location' => 'query',
             'type' => 'array',
             'required' => true,
-            'items' => array(
-                'filterGroups' => array(
+            'items' => [
+                'filterGroups' => [
                     'type' => 'array',
                     'description' => 'Filter groups, are connected as AND where condition',
-                    'items' => array(
+                    'items' => [
                         '$ref' => 'FilterGroup'
-                    ),
-                ),
-                'sortOrders' => array(
+                    ],
+                ],
+                'sortOrders' => [
                     'description' => 'An array of sorters',
                     'type' => 'array',
-                    'items' => array(
+                    'items' => [
                         '$ref' => 'SortOrder'
-                    ),
-                ),
-                'pageSize' => array(
+                    ],
+                ],
+                'pageSize' => [
                     'type' => 'string',
-                ),
-                'currentPage' => array(
+                ],
+                'currentPage' => [
                     'type' => 'string',
-                ),
-            ),
-        ),
-        'FilterGroup' => array(
+                ],
+            ],
+        ],
+        'FilterGroup' => [
             'type' => 'object',
-            'properties' => array(
-                'filters' => array(
+            'properties' => [
+                'filters' => [
                     'type' => 'array',
                     'description' => 'Filters, are connected as OR where condition',
                     'required' => true,
-                    'items' => array(
+                    'items' => [
                         '$ref' => 'Filter'
-                    ),
-                ),
-            ),
-        ),
-        'Filter' => array(
+                    ],
+                ],
+            ],
+        ],
+        'Filter' => [
             'type' => 'object',
-            'properties' => array(
-                'field' => array(
+            'properties' => [
+                'field' => [
                     'type' => 'string',
                     'required' => true,
-                ),
-                'value' => array(
+                ],
+                'value' => [
                     'type' => 'string',
                     'required' => false,
-                ),
-                'conditionType' => array(
+                ],
+                'conditionType' => [
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
-        ),
-        'SortOrder' => array(
+                ],
+            ],
+        ],
+        'SortOrder' => [
             'type' => 'object',
-            'properties' => array(
-                'field' => array(
+            'properties' => [
+                'field' => [
                     'description' => 'The property use for sorting',
                     'type' => 'string',
                     'required' => true,
-                ),
-                'direction' => array(
+                ],
+                'direction' => [
                     'type' => 'string',
                     'required' => false,
-                ),
-            ),
-        ),
-        'StockItemParam' => array(
+                ],
+            ],
+        ],
+        'StockItemParam' => [
             'location' => 'json',
             'type' => 'object',
-            'properties' => array(
-                'qty' => array(
+            'properties' => [
+                'qty' => [
                     'type' => 'integer',
                     'required' => true,
-                ),
-                'is_in_stock' => array(
+                ],
+                'is_in_stock' => [
                     'type' => 'boolean',
                     'required' => false,
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+];

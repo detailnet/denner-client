@@ -27,7 +27,7 @@ class PrepareRequest implements
      */
     public function getEvents()
     {
-        return array('prepared' => array('onPrepared'));
+        return ['prepared' => ['onPrepared']];
     }
 
     /**
@@ -54,6 +54,6 @@ class PrepareRequest implements
         $operation = $this->description->getOperation($command->getName());
         $requestOptions = $operation->getData('requestOptions');
 
-        return is_array($requestOptions) ? $requestOptions : array();
+        return is_array($requestOptions) ? $requestOptions : [];
     }
 }

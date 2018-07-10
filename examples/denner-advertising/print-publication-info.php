@@ -12,6 +12,6 @@ if (!$printPublicationId) {
 
 $client = AdvertisingClient::factory($config);
 
-$response = $client->fetchPrintPublication(array('print_publication_id' => $printPublicationId));
+$response = $client->fetchPrintPublication(['print_publication_id' => $printPublicationId]);
 
 var_dump("Response:", $response, "Data:", $response->toArray());

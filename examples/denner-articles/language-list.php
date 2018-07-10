@@ -3,7 +3,7 @@
 use Denner\Client\ArticlesClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
+$params = [];
 
 // Example: ?page=2
 if (isset($_GET['page'])) {
@@ -15,21 +15,21 @@ if (isset($_GET['page_size'])) {
     $params['page_size'] = (int) $_GET['page_size'];
 }
 
-$params['filter'] = array(
-    array(
+$params['filter'] = [
+    [
         'property' => 'locale',
         'value' => 'de',
         'operator' => '=', // equals
         'type' => 'string',
-    ),
-);
+    ],
+];
 
-$params['sort'] = array(
-    array(
+$params['sort'] = [
+    [
         'property' => 'locale',
         'direction' => 'desc',
-    ),
-);
+    ],
+];
 
 $client = ArticlesClient::factory($config);
 
