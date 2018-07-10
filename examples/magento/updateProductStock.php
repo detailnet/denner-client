@@ -28,15 +28,15 @@ if (!$stock) {
 }
 
 $response = $client->updateProductStock(
-    array(
+    [
         'Authorization' => sprintf('Bearer %s', $token),
         'productSku' => $id,
         'itemId' => $pid, // Tests have demonstrated that this param has no effect on the result, is ignored but has to be present
-        'stockItem' => array(
+        'stockItem' => [
             "qty" => (int) $stock,
             "is_in_stock" => ((int) $stock) > 0,
-        ),
-    )
+        ],
+    ]
 );
 
 var_dump($response->toArray());

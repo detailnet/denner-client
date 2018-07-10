@@ -3,14 +3,14 @@
 use Denner\Client\ShopClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
-$filterParams = array(
+$params = [];
+$filterParams = [
     'id',
     'wine_id',
     'shop_user_id',
     'email',
     'source',
-);
+];
 
 foreach ($filterParams as $param) {
     if (isset($_GET[$param])) {

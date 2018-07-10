@@ -3,7 +3,7 @@
 use Denner\Client\AdvertisingClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
+$params = [];
 
 // Example: ?page=2
 if (isset($_GET['page'])) {

@@ -12,6 +12,6 @@ if (!$assetId) {
 
 $client = AssetsClient::factory($config);
 
-$response = $client->fetchAsset(array('asset_id' => $assetId));
+$response = $client->fetchAsset(['asset_id' => $assetId]);
 
 var_dump($response);

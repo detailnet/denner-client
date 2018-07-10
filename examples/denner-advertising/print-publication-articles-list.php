@@ -3,7 +3,7 @@
 use Denner\Client\AdvertisingClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array();
+$params = [];
 
 $params['print_publication_id'] = @$_GET['print_publication_id'] ?: '44444444-aaaa-4444-aaaa-444444444444';
 

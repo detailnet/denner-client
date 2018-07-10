@@ -17,10 +17,10 @@ if (!$id) {
 }
 
 $response = $client->getProductStock(
-    array(
+    [
         'Authorization' => sprintf('Bearer %s', $token),
         'productSku' => $id,
-    )
+    ]
 );
 
 var_dump($response->getResource());

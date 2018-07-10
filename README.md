@@ -17,7 +17,7 @@ Install the library through [Composer](http://getcomposer.org/) using the follow
      ```json
      {
          "require": {
-             "detailnet/denner-client": "1.x-dev"
+             "detailnet/denner-client": "^3.0"
          }
      }
      ```
@@ -34,16 +34,16 @@ See the following example for how to use the library:
 
 ```php
 // App-ID and App-Key are required to authenticate the client
-$config = array(
+$config = [
     'app_id' => 'your-app-id',
     'app_key' => 'your-app-key',
-);
+];
 
 // Create the client (e.g. the client for Denner Articles Service)
 $client = ArticlesClient::factory($config);
 
 // Send a request
-$params = array('week' => '50');
+$params = ['week' => '50'];
 $response = $client->listAdvertisedArticles($params);
 ```
 

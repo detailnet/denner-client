@@ -12,10 +12,10 @@ if (!$jobId) {
     throw new RuntimeException('Missing or invalid parameter "job_id"');
 }
 
-$params = array(
+$params = [
     'job_id' => $jobId,
     'status' => 'closed',
-);
+];
 
 $client = TranslationsClient::factory($config);
 

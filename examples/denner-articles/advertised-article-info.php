@@ -12,6 +12,6 @@ if (!$advertisedArticleId) {
 
 $client = ArticlesClient::factory($config);
 
-$response = $client->fetchAdvertisedArticle(array('advertised_article_id' => $advertisedArticleId));
+$response = $client->fetchAdvertisedArticle(['advertised_article_id' => $advertisedArticleId]);
 
 var_dump($response);

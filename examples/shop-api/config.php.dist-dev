@@ -1,7 +1,7 @@
 <?php
 
-return array(
-//    'base_url' => 'https://denner-shop-api.detailnet.ch/test/',
-    'base_url' => 'https://denner-shop-api-v2.detailnet.ch/',
+return [
+//    'base_uri' => 'https://denner-shop-api.detailnet.ch/test/',
+    'base_uri' => 'https://denner-shop-api-v2.detailnet.ch/',
     'app_key' => 'your-app-key',
-);
+];

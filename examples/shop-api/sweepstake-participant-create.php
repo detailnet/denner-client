@@ -3,7 +3,7 @@
 use Denner\Client\ShopClient;
 
 $config = require realpath(__DIR__ . '/../bootstrap.php');
-$params = array(
+$params = [
     "firstname" => "Michelle",
     "lastname" => "Muster",
     "address" => "Bahnhofstrasse 7",
@@ -13,7 +13,7 @@ $params = array(
     "gender" => "female",
     "shop_user_id" => 123456789,
     "language" => "de",
-);
+];
 
 $client = ShopClient::factory($config);
 
