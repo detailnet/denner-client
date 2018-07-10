@@ -51,4 +51,6 @@ $response = $client->listProducts(
 );
 
 var_dump($response->getResource());
-echo '<pre>'; print_r($response->getResource()->get('items'));
+
+echo '<pre>';
+print_r($response->getResource()->get('items'));

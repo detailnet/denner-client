@@ -51,7 +51,7 @@ var_dump($response->getResource());
 
 $orders = [];
 
-foreach ($response->getResource()->get('items') as $order)  {
+foreach ($response->getResource()->get('items') as $order) {
     //var_dump($order);
     $data = [
         'increment_id' => $order['increment_id'],
@@ -67,5 +67,3 @@ foreach ($response->getResource()->get('items') as $order)  {
 }
 
 var_dump($orders);
-
-
