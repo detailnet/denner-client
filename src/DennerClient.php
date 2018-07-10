@@ -44,7 +44,7 @@ abstract class DennerClient extends ServiceClient
             'connect_timeout' => 10,
             // Float describing the timeout of the request in seconds.
             // 0 was the default (wait indefinitely).
-            'timeout' => 60, // 60 seconds, may be overridden by individual operations
+            'timeout' => 60,
         ];
 
         $headers = [
