@@ -59,20 +59,25 @@ abstract class BaseResponse implements
     {
         $data = json_decode($value, true);
 
-        if ($data === false) {
-            $error = json_last_error();
+        if (!$data) {
+            $message = 'Unknown jsonError';
+            $jsonError = json_last_error();
 
-            if ($error !== JSON_ERROR_NONE) {
-                $message = json_last_error_msg();
+            if ($jsonError !== JSON_ERROR_NONE) {
+                $jsonMessage = json_last_error_msg();
 
-                if ($message === false) {
-                    $message = 'Unknown error';
+                if ($jsonMessage !== false) {
+                    $message = $jsonMessage;
                 }
-
-                throw new Exception\RuntimeException(
-                    sprintf('Unable to decode JSON: %s', $message)
-                );
             }
+
+            throw new Exception\RuntimeException(
+                sprintf('Unable to decode JSON: %s', $message)
+            );
+        } elseif (!is_array($data)) {
+            throw new Exception\RuntimeException(
+                sprintf('Invalid JSON: Expected array but got %s', gettype($data))
+            );
         }
 
         return $data;
