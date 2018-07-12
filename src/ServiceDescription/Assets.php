@@ -45,6 +45,9 @@ return [
                 ],
             ],
             'responseClass' => Response\ResourceResponse::CLASS,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
         ],
         'listAssetCollections' => [
             'httpMethod' => 'GET',

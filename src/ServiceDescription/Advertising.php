@@ -66,6 +66,9 @@ return [
                 ],
             ],
             'responseClass' => Response\ResourceResponse::CLASS,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
         ],
         'listPrintPublicationArticles' => [
             'httpMethod' => 'GET',

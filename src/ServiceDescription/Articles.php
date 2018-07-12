@@ -53,6 +53,9 @@ return [
                 ],
             ],
             'responseClass' => Response\ResourceResponse::CLASS,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
         ],
         'updateAdvertisedArticle' => [
             'httpMethod' => 'PATCH',
@@ -70,6 +73,9 @@ return [
                 'location' => 'json',
             ],
             'responseClass' => Response\ResourceResponse::CLASS,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
         ],
         // Articles
         'fetchArticle' => [
@@ -101,6 +107,9 @@ return [
                 ],
             ],
             'responseClass' => Response\ResourceResponse::CLASS,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
         ],
         // Languages
         'listLanguages' => [

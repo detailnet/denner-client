@@ -9,7 +9,7 @@ use Denner\Client\Response;
  *
  * @method static AssetsClient factory(array $options = [])
  * @method Response\ListResponse listAssets(array $params = [])
- * @method Response\ResourceResponse fetchAsset(array $params = [])
+ * @method Response\ResourceResponse|null fetchAsset(array $params = [])
  * @method Response\ListResponse listAssetCollections(array $params = [])
  * @method Response\ListResponse listPurposes(array $params = [])
  */

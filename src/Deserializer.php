@@ -24,15 +24,17 @@ class Deserializer
 
     public function __invoke(PsrResponse $response, PsrRequest $request, CommandInterface $command): ?Response
     {
+        $name = $command->getName();
+        $operation = $this->description->getOperation($name);
+
         // No exception for Not Found errors
-        if ($response->getStatusCode() == 404) {
+        if ($response->getStatusCode() == 404
+            && $operation->getData('throw_exception_when_not_found') === false
+        ) {
             return null;
         } elseif ($response->getStatusCode() >= 400) {
             throw RequestException::create($request, $response);
         }
-
-        $name = $command->getName();
-        $operation = $this->description->getOperation($name);
 
         $responseClass = $operation->getResponseModel();
 

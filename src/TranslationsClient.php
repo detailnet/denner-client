@@ -9,7 +9,7 @@ use Denner\Client\Response;
  *
  * @method static TranslationsClient factory(array $options = [])
  * @method Response\ListResponse listJobs(array $params = [])
- * @method Response\ResourceResponse updateJob(array $params = [])
+ * @method Response\ResourceResponse|null updateJob(array $params = [])
  */
 class TranslationsClient extends DennerClient
 {

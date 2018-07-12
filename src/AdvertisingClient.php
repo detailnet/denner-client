@@ -9,7 +9,7 @@ use Denner\Client\Response;
  *
  * @method static AdvertisingClient factory(array $options = [])
  * @method Response\ListResponse listPrintPublications(array $params = [])
- * @method Response\ResourceResponse fetchPrintPublication(array $params = [])
+ * @method Response\ResourceResponse|null fetchPrintPublication(array $params = [])
  * @method Response\ListResponse listPrintPublicationArticles(array $params = [])
  * @method Response\ListResponse listPrintPublicationLinks(array $params = [])
  */

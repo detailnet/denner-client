@@ -12,7 +12,7 @@ use Denner\Client\Exception;
 
 abstract class DennerClient extends ServiceClient
 {
-    const CLIENT_VERSION = '3.0.0';
+    const CLIENT_VERSION = '3.0.1';
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
