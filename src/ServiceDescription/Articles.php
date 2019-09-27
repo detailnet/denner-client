@@ -242,7 +242,7 @@ return [
                 'level' => [
                     'description' => 'Price level',
                     'type' => 'integer',
-                    'required' => true,
+                    'required' => false,
                 ],
                 'channel' => [
                     'description' => 'Price channel',
