@@ -98,6 +98,13 @@ return [
                 'price-selection' => [
                     '$ref' => 'PriceSelectionParam',
                 ],
+                'wine-year' => [
+                    'description' => 'Wine year (for wine experts/medals)',
+                    'location' => 'query',
+                    'required' => false,
+                    'type' => 'integer',
+                    'minimum' => 1900
+                ],
                 'broadcast_actions' => [
                     'description' => 'Request for broadcast',
                     'location' => 'header',
