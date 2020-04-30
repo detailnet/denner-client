@@ -23,7 +23,7 @@ $operations = [
     'listProducts'       => sprintf('?token=%s', $token),
     'getProductStock'    => sprintf('?token=%s&id=%s', $token, '050005'),
     'updateProductStock' => sprintf('?token=%s&id=%s&pid=%s&stock=%s', $token, '050005', '666', '123'),
-    'listOrders'         => sprintf('?token=%s&from=%s', $token, urlencode('2018-01-01 00:00:00')),
+    'listOrders'         => sprintf('?token=%s&from=%s', $token, urlencode(date('Y-m-d H:i:s', strtotime('-3 days')))),
 ];
 
 foreach ($operations as $operation => $params) {

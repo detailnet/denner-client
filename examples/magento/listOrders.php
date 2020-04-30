@@ -8,6 +8,8 @@ $client = MagentoClient::factory($config);
 
 $token = @$_GET['token'] ?: false;
 $from  = @$_GET['from'] ?: false;
+$pageSize = @$_GET['page-size'] ?: '5';
+$page  = @$_GET['page'] ?: '1';
 
 if (!$token) {
     throw new RuntimeException('Missing or invalid parameter "token"');
@@ -41,13 +43,33 @@ $response = $client->listOrders(
                     ]
                 ],
             ],
-            'pageSize' => '5',
+            'sortOrders' => [
+                [
+                    'field' => 'created_at',
+                    'direction' => 'ASC',
+                ],
+            ],
+            'pageSize' => $pageSize,
+            'currentPage' => $page,
         ],
     ]
 );
 
-var_dump($response->getResource());
+// var_dump($response->getResource());
 // echo '<pre>'; print_r($response->getResource()->get('items'));
+
+$url = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
+
+foreach (['Previous page' => -1, 'Next page' => 1 ] as $operation => $inc) {
+    $newPage = intval($page) + $inc;
+
+    if ($newPage > 0) {
+        $_GET['page'] = (string) $newPage;
+
+        printf('<br/><a href="%s/listOrders.php?%s">%s</a>', $url, http_build_query($_GET), $operation);
+    }
+}
+
 
 $orders = [];
 
@@ -55,6 +77,7 @@ foreach ($response->getResource()->get('items') as $order) {
     //var_dump($order);
     $data = [
         'increment_id' => $order['increment_id'],
+        'created_at' => $order['created_at'],
         'items' => [],
     ];
 

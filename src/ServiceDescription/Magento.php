@@ -176,6 +176,7 @@ return [
                     'required' => true,
                 ],
                 'direction' => [
+                    'description' => 'Direction of the sort (ASC|DESC)',
                     'type' => 'string',
                     'required' => false,
                 ],
