@@ -261,6 +261,11 @@ return [
                     'type' => 'string',
                     'required' => false,
                 ],
+                'hundred_gram' => [
+                    'description' => '100 gram prices',
+                    'type' => 'boolean',
+                    'required' => false,
+                ],
             ],
         ],
     ],
