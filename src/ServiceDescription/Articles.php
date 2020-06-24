@@ -98,6 +98,12 @@ return [
                 'price-selection' => [
                     '$ref' => 'PriceSelectionParam',
                 ],
+                'hundred-gram-prices' => [
+                    'description' => 'Apply 100 gram promotion to prices?',
+                    'location' => 'query',
+                    'required' => false,
+                    'type' => ['boolean', 'string', 'integer'], // For true string values 'true', 'yes', 'ja', '1' are accepted
+                ],
                 'wine-year' => [
                     'description' => 'Wine year (for wine experts/medals)',
                     'location' => 'query',
@@ -259,11 +265,6 @@ return [
                 'price_region' => [
                     'description' => 'Price region',
                     'type' => 'string',
-                    'required' => false,
-                ],
-                'hundred_gram' => [
-                    'description' => '100 gram prices',
-                    'type' => 'boolean',
                     'required' => false,
                 ],
             ],
