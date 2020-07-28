@@ -59,4 +59,27 @@ class ArticlesClient extends DennerClient
 
         return $this->listAdvertisedArticles($params);
     }
+
+    public function listScreenableAdvertisedArticlesByPromotion(string $promotionId, array $params = []): Response\ListResponse
+    {
+        $filters = [
+            'promotion.id' => [
+                'property' => 'promotion.id',
+                'value' => $promotionId,
+                'operator' => '=',
+                'type' => 'string',
+            ],
+            [ // Advertised articles with at least one screen
+                'property' => 'screens.0',
+                'operator' => 'exists',
+                'value' => true,
+                'type' => 'boolean',
+            ],
+        ];
+
+        // We may need to replace an already existing filter
+        $this->addOrReplaceFilters($filters, $params);
+
+        return $this->listAdvertisedArticles($params);
+    }
 }
