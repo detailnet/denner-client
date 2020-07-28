@@ -6,7 +6,6 @@ use Denner\Client\Response;
 
 /**
  * Denner Articles Service client.
- *
  * @method static ArticlesClient factory(array $options = [])
  * @method Response\ListResponse listAdvertisedArticles(array $params = [])
  * @method Response\ResourceResponse|null fetchAdvertisedArticle(array $params = [])
@@ -43,8 +42,11 @@ class ArticlesClient extends DennerClient
         return $this->listAdvertisedArticles($params);
     }
 
-    public function listAdvertisedArticlesByPromotion(string $promotionId, array $params = []): Response\ListResponse
-    {
+    public function listAdvertisedArticlesByPromotion(
+        string $promotionId,
+        array $params = [],
+        bool $onlyScreenable = false
+    ): Response\ListResponse {
         $filters = [
             'promotion.id' => [
                 'property' => 'promotion.id',
@@ -54,28 +56,14 @@ class ArticlesClient extends DennerClient
             ],
         ];
 
-        // We may need to replace an already existing filter
-        $this->addOrReplaceFilters($filters, $params);
-
-        return $this->listAdvertisedArticles($params);
-    }
-
-    public function listScreenableAdvertisedArticlesByPromotion(string $promotionId, array $params = []): Response\ListResponse
-    {
-        $filters = [
-            'promotion.id' => [
-                'property' => 'promotion.id',
-                'value' => $promotionId,
-                'operator' => '=',
-                'type' => 'string',
-            ],
-            [ // Advertised articles with at least one screen
+        if ($onlyScreenable) {
+            $filters[] = [ // Advertised articles with at least one screen
                 'property' => 'screens.0',
                 'operator' => 'exists',
                 'value' => true,
                 'type' => 'boolean',
-            ],
-        ];
+            ];
+        }
 
         // We may need to replace an already existing filter
         $this->addOrReplaceFilters($filters, $params);
