@@ -70,4 +70,37 @@ class ArticlesClient extends DennerClient
 
         return $this->listAdvertisedArticles($params);
     }
+
+    public function getAdvertisedArticleByArticleSelection(
+        string $promotionCode,
+        string $articleId,
+        int $quantity
+    ): ?Response\Resource {
+        $results = $this->listAdvertisedArticles(
+            [
+                'filter' => [
+                    [
+                        'property' => 'promotion.code',
+                        'value' => $promotionCode,
+                        'operator' => '=',
+                        'type' => 'string',
+                    ],
+                    [
+                        'property' => 'article_id',
+                        'value' => $articleId,
+                        'operator' => '=',
+                        'type' => 'string',
+                    ],
+                    [
+                        'property' => 'quantity',
+                        'value' => $quantity,
+                        'operator' => '=',
+                        'type' => 'integer',
+                    ],
+                ],
+            ]
+        );
+
+        return $results->getResourceCount() === 1 ? $results->getResources()[0] : null;
+    }
 }
