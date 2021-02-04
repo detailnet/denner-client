@@ -1,0 +1,39 @@
+name: denner-client
+
+env_file:
+ - .env # To define the COMPOSER_AUTH variable to access GitHub private repos
+
+services:
+  appserver:
+    type: php:7.2
+    via: cli
+    run:
+      - composer install
+    #overrides:
+    #  environment:
+    #    COMPOSER_AUTH: |
+    #      {"github-oauth": {"github.com": "<your token>"}}
+
+tooling:
+  xon:
+    service: appserver
+    description: Enable xdebug for apache.
+    cmd: "docker-php-ext-enable xdebug && /etc/init.d/apache2 reload"
+    user: root
+  xoff:
+    service: appserver
+    description: Disable xdebug for apache.
+    cmd: "rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload"
+    user: root
+  composer:
+    service: appserver
+    description: Run composer commands
+    cmd: composer -v --ansi
+  #    cmd:
+  #      - php -dmemory_limit=-1 /usr/local/bin/composer
+  test:
+    description: Run all tests
+    cmd:
+      - appserver: composer test
+  php:
+    service: appserver
