@@ -15,7 +15,7 @@ return [
             'additionalParameters' => [
                 'location' => 'json',
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
         ],
         'createWineAppraisalVote' => [
             'httpMethod' => 'POST',
@@ -39,7 +39,7 @@ return [
             'additionalParameters' => [
                 'location' => 'json',
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
         ],
         'createWineAppraisal' => [
             'httpMethod' => 'POST',
@@ -57,7 +57,7 @@ return [
             'additionalParameters' => [
                 'location' => 'json',
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
         ],
         'listWineAppraisals' => [
             'httpMethod' => 'GET',
@@ -104,7 +104,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'appraisals',
         ],
         'listWineAppraisalsByWine' => [
@@ -128,7 +128,7 @@ return [
 //                    '$ref' => 'SortParam',
 //                ),
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'appraisals',
         ],
         'listWines' => [
@@ -149,7 +149,7 @@ return [
                     '$ref' => 'FilterParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'articles',
         ],
         'listWineGrowers' => [
@@ -170,7 +170,7 @@ return [
                     '$ref' => 'FilterParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'wine_growers',
         ],
     ],

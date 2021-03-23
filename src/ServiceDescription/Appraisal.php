@@ -26,7 +26,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'ratings',
         ],
         'fetchRating' => [
@@ -41,7 +41,7 @@ return [
                     'required' => true,
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
             'data' => [
                 'throw_exception_when_not_found' => false,
             ],

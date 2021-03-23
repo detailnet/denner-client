@@ -2,20 +2,16 @@
 
 namespace Denner\Client;
 
+use Denner\Client\Response\Response;
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface as ServiceDescription;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request as PsrRequest;
 use GuzzleHttp\Psr7\Response as PsrResponse;
 
-use Denner\Client\Response\Response;
-
 class Deserializer
 {
-    /**
-     * @var ServiceDescription $description
-     */
-    protected $description;
+    protected ServiceDescription $description;
 
     public function __construct(ServiceDescription $description)
     {
@@ -38,11 +34,11 @@ class Deserializer
 
         $responseClass = $operation->getResponseModel();
 
-        if ($responseClass === null) {
-            throw new Exception\RuntimeException(
-                sprintf('No response class configured for operation "%s"', $command->getName())
-            );
-        }
+        //if ($responseClass === null) {
+        //    throw new Exception\RuntimeException(
+        //        sprintf('No response class configured for operation "%s"', $command->getName())
+        //    );
+        //}
 
         if (!class_exists($responseClass)) {
             throw new Exception\RuntimeException(

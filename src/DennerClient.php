@@ -2,17 +2,25 @@
 
 namespace Denner\Client;
 
-use ReflectionClass;
-
+use Denner\Client\Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Command\Guzzle\Description as ServiceDescription;
 use GuzzleHttp\Command\Guzzle\GuzzleClient as ServiceClient;
+use ReflectionClass;
+use function array_key_exists;
+use function array_replace_recursive;
+use function array_values;
+use function is_array;
+use function ltrim;
+use function preg_replace;
+use function sprintf;
+use function str_replace;
+use function strtolower;
 
-use Denner\Client\Exception;
-
-abstract class DennerClient extends ServiceClient
+abstract class DennerClient extends ServiceClient implements
+    Client
 {
-    const CLIENT_VERSION = '3.0.1';
+    const CLIENT_VERSION = '4.0.0';
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
@@ -100,11 +108,7 @@ abstract class DennerClient extends ServiceClient
         return $this->getHttpClient()->getConfig('base_uri');
     }
 
-    /**
-     * @param array $filtersToAdd
-     * @param array $params
-     */
-    protected function addOrReplaceFilters(array $filtersToAdd, array &$params)
+    protected function addOrReplaceFilters(array $filtersToAdd, array &$params): void
     {
         // We may need to replace already existing filters
         if (isset($params['filter']) && is_array($params['filter'])) {
@@ -137,20 +141,17 @@ abstract class DennerClient extends ServiceClient
 
     private static function getServiceName(bool $asSnake = true): string
     {
-        $className = (new ReflectionClass(static::CLASS))->getShortName();
+        $className = (new ReflectionClass(static::class))->getShortName();
         $serviceName = str_replace('Client', '', $className);
 
         if ($asSnake !== false) {
-            $serviceName = ltrim(strtolower(preg_replace('/[A-Z]/', '-$0', $serviceName)), '-');
-            $serviceName = preg_replace('/[-]+/', '-', $serviceName);
+            $serviceName = ltrim(strtolower(preg_replace('/[A-Z]/', '-$0', $serviceName) ?? ''), '-');
+            $serviceName = preg_replace('/[-]+/', '-', $serviceName) ?? '';
         }
 
         return $serviceName;
     }
 
-    /**
-     * @return string
-     */
     private static function getServiceDescriptionName(): string
     {
         return self::getServiceName(false);
