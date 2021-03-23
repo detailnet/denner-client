@@ -1,9 +1,6 @@
 # denner-client
 
-[![Build Status](https://travis-ci.org/detailnet/denner-client.svg?branch=master)](https://travis-ci.org/detailnet/denner-client)
-[![Coverage Status](https://img.shields.io/coveralls/detailnet/denner-client.svg)](https://coveralls.io/r/detailnet/denner-client)
-[![Latest Stable Version](https://poser.pugx.org/detailnet/denner-client/v/stable.svg)](https://packagist.org/packages/detailnet/denner-client)
-[![Latest Unstable Version](https://poser.pugx.org/detailnet/denner-client/v/unstable.svg)](https://packagist.org/packages/detailnet/denner-client)
+[![Actions Status](https://github.com/detailnet/denner-client/workflows/Tests/badge.svg)](https://github.com/detailnet/denner-client/actions)
 
 API Client for Denner Portal 2.0 Web Services
 

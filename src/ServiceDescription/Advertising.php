@@ -23,7 +23,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'print_publication_links',
         ],
         'listPrintPublications' => [
@@ -50,7 +50,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'print_publications',
         ],
         'fetchPrintPublication' => [
@@ -65,7 +65,7 @@ return [
                     'required' => true,
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
             'data' => [
                 'throw_exception_when_not_found' => false,
             ],
@@ -88,7 +88,7 @@ return [
                     '$ref' => 'PageSizeParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'print_publication_articles',
         ],
     ],

@@ -3,32 +3,24 @@
 namespace Denner\Client\Response;
 
 use ArrayIterator;
-
-use GuzzleHttp\Command\Guzzle\Operation;
-use GuzzleHttp\Psr7\Response as PsrResponse;
-
 use Denner\Client\Exception;
 use Denner\Client\Response\Resource as ClientResource;
+use GuzzleHttp\Command\Guzzle\Operation;
+use GuzzleHttp\Psr7\Response as PsrResponse;
+use IteratorAggregate;
+use function is_string;
+use function sprintf;
 
 class ListResponse extends BaseResponse implements
-    \IteratorAggregate
+    IteratorAggregate
 {
-    /**
-     * @var ClientResource[]
-     */
-    protected $resources = [];
+    public const OPTION_DATA_ROOT = 'data_root';
 
-    /**
-     * @var string
-     */
-    private $dataRoot;
+    /** @var ClientResource[] */
+    protected array $resources = [];
+    private string $dataRoot;
 
-    /**
-     * @param Operation $operation
-     * @param PsrResponse $response
-     * @return ListResponse
-     */
-    public static function fromOperation(Operation $operation, PsrResponse $response): Response
+    public static function fromOperation(Operation $operation, PsrResponse $response): ListResponse
     {
         $operationConfig = $operation->toArray();
 
@@ -41,12 +33,26 @@ class ListResponse extends BaseResponse implements
             );
         }
 
-        return new static($response, $operationConfig['responseDataRoot']);
+        return new static($response, [self::OPTION_DATA_ROOT => $operationConfig['responseDataRoot']]);
     }
 
-    public function __construct(PsrResponse $response, string $dataRoot)
+    public function __construct(PsrResponse $response, array $options = [])
     {
-        parent::__construct($response);
+        parent::__construct($response, $options);
+
+        $dataRoot = $this->getOption(self::OPTION_DATA_ROOT);
+
+        if ($dataRoot === null
+            || !is_string($dataRoot)
+            || !is_callable([$dataRoot, '__toString'])
+        ) {
+            throw new Exception\RuntimeException(
+                sprintf(
+                    'Option "%s" is mandatory, has to be a string or implement __toString',
+                    self::OPTION_DATA_ROOT
+                )
+            );
+        }
 
         $this->dataRoot = $dataRoot;
 
@@ -65,8 +71,6 @@ class ListResponse extends BaseResponse implements
 
     /**
      * Count resources on current page
-     *
-     * @return int
      */
     public function getResourceCount(): int
     {
@@ -75,8 +79,6 @@ class ListResponse extends BaseResponse implements
 
     /**
      * Count resources on all pages
-     *
-     * @return integer|null
      */
     public function getTotalResourceCount(): ?int
     {
@@ -85,8 +87,6 @@ class ListResponse extends BaseResponse implements
 
     /**
      * Count number of pages
-     *
-     * @return integer|null
      */
     public function getPageCount(): ?int
     {
@@ -95,8 +95,6 @@ class ListResponse extends BaseResponse implements
 
     /**
      * Get page size
-     *
-     * @return integer|null
      */
     public function getPageSize(): ?int
     {

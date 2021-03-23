@@ -30,7 +30,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'advertised_articles',
         ],
         'fetchAdvertisedArticle' => [
@@ -52,7 +52,7 @@ return [
                     'required' => false,
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
             'data' => [
                 'throw_exception_when_not_found' => false,
             ],
@@ -72,7 +72,7 @@ return [
             'additionalParameters' => [
                 'location' => 'json',
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
             'data' => [
                 'throw_exception_when_not_found' => false,
             ],
@@ -119,7 +119,7 @@ return [
                     'required' => false,
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
             'data' => [
                 'throw_exception_when_not_found' => false,
             ],
@@ -144,7 +144,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'languages',
         ],
         // Promotions
@@ -166,7 +166,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'promotions',
         ],
     ],

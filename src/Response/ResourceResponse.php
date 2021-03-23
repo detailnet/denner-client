@@ -2,17 +2,13 @@
 
 namespace Denner\Client\Response;
 
+use Denner\Client\Response\Resource as ClientResource;
 use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Psr7\Response as PsrResponse;
 
-use Denner\Client\Response\Resource as ClientResource;
-
 class ResourceResponse extends BaseResponse
 {
-    /**
-     * @var ClientResource
-     */
-    protected $resource;
+    protected ?ClientResource $resource = null;
 
     /**
      * @param Operation $operation

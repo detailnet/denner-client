@@ -2,17 +2,14 @@
 
 namespace Denner\Client\Response;
 
+use ArrayAccess;
+use Denner\Client\Exception;
 use JmesPath\Env as JmesPath;
 
-use Denner\Client\Exception;
-
 class Resource implements
-    \ArrayAccess
+    ArrayAccess
 {
-    /**
-     * @var array
-     */
-    protected $data = [];
+    protected array $data = [];
 
     public function __construct(array $data)
     {
@@ -25,7 +22,6 @@ class Resource implements
     }
 
     /**
-     * @param string $key
      * @param mixed $default
      * @return mixed
      */
@@ -35,7 +31,6 @@ class Resource implements
     }
 
     /**
-     * @param string $expression
      * @return mixed|null
      */
     public function search(string $expression)
@@ -66,7 +61,7 @@ EOT;
     }
 
     /**
-     * @param string|integer $offset
+     * @param mixed $offset
      * @return mixed|null
      */
     public function offsetGet($offset)
@@ -75,7 +70,7 @@ EOT;
     }
 
     /**
-     * @param string|integer $offset
+     * @param mixed $offset
      * @param mixed $value
      */
     public function offsetSet($offset, $value)
@@ -86,8 +81,8 @@ EOT;
     }
 
     /**
-     * @param string|integer $offset
-     * @return boolean
+     * @param mixed $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -95,7 +90,7 @@ EOT;
     }
 
     /**
-     * @param string|integer $offset
+     * @param mixed $offset
      */
     public function offsetUnset($offset)
     {

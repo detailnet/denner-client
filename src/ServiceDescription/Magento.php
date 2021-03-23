@@ -22,7 +22,7 @@ return [
                     'required' => true,
                 ],
             ],
-            'responseClass' => Response\PlainTextResponse::CLASS,
+            'responseClass' => Response\PlainTextResponse::class,
         ],
         'listProducts' => [
             //'tag' => 'catalogProductRepositoryV1',
@@ -39,7 +39,7 @@ return [
                     '$ref' => 'SearchCriteriaParam',
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
         ],
         'getProductStock' => [
             //'tag' => 'catalogInventoryStockRegistryV1',
@@ -62,7 +62,7 @@ return [
                     'required' => false,
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
         ],
         'updateProductStock' => [
             //'tag' => 'catalogInventoryStockRegistryV1',
@@ -89,7 +89,7 @@ return [
                     '$ref' => 'StockItemParam',
                 ],
             ],
-            'responseClass' => Response\PlainTextResponse::CLASS,
+            'responseClass' => Response\PlainTextResponse::class,
         ],
         'listOrders' => [
             //'tag' => 'salesOrderRepositoryV1',
@@ -106,7 +106,7 @@ return [
                     '$ref' => 'SearchCriteriaParam',
                 ],
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
         ],
     ],
     'models' => [

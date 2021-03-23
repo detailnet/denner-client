@@ -32,7 +32,7 @@ return [
                     '$ref' => 'SortParam',
                 ],
             ],
-            'responseClass' => Response\ListResponse::CLASS,
+            'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'jobs',
         ],
         'updateJob' => [
@@ -50,7 +50,7 @@ return [
             'additionalParameters' => [
                 'location' => 'json',
             ],
-            'responseClass' => Response\ResourceResponse::CLASS,
+            'responseClass' => Response\ResourceResponse::class,
             'data' => [
                 'throw_exception_when_not_found' => false,
             ],
