@@ -14,7 +14,7 @@ Install the library through [Composer](http://getcomposer.org/) using the follow
      ```json
      {
          "require": {
-             "detailnet/denner-client": "^3.0"
+             "detailnet/denner-client": "^4.0"
          }
      }
      ```
