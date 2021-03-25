@@ -8,7 +8,9 @@ use Denner\Client\Response\Resource as ClientResource;
 use GuzzleHttp\Command\Guzzle\Operation;
 use GuzzleHttp\Psr7\Response as PsrResponse;
 use IteratorAggregate;
+use function is_object;
 use function is_string;
+use function method_exists;
 use function sprintf;
 
 class ListResponse extends BaseResponse implements
@@ -43,8 +45,8 @@ class ListResponse extends BaseResponse implements
         $dataRoot = $this->getOption(self::OPTION_DATA_ROOT);
 
         if ($dataRoot === null
-            || !is_string($dataRoot)
-            || !is_callable([$dataRoot, '__toString'])
+            || (!is_object($dataRoot) && !is_string($dataRoot))
+            || (is_object($dataRoot) && !method_exists($dataRoot, '__toString'))
         ) {
             throw new Exception\RuntimeException(
                 sprintf(
@@ -54,7 +56,7 @@ class ListResponse extends BaseResponse implements
             );
         }
 
-        $this->dataRoot = $dataRoot;
+        $this->dataRoot = (string) $dataRoot;
 
         foreach ($this->getRawResources() as $resourceData) {
             $this->resources[] = new Resource($resourceData);
