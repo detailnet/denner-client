@@ -1,8 +1,8 @@
-name: denner-rendering
+name: denner-client
 
 proxy:
   appserver:
-    - denner-rendering.detailnet.me
+    - denner-client.detailnet.me
 
 services:
   appserver:

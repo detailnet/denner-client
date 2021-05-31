@@ -20,7 +20,7 @@ use function strtolower;
 abstract class DennerClient extends ServiceClient implements
     Client
 {
-    const CLIENT_VERSION = '4.0.0';
+    const CLIENT_VERSION = '4.1.0';
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
