@@ -33,17 +33,10 @@ return [
             'summary' => 'Fetch an store',
             'parameters' => [
                 'store_id' => [
-                    'description' => 'The ID of the store to fetch',
+                    'description' => 'The ID or code of the store to fetch',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
-                ],
-                'broadcast_actions' => [
-                    'description' => 'Request for broadcast',
-                    'location' => 'header',
-                    'sentAs' => 'X-Denner-Broadcast',
-                    'type' => 'string',
-                    'required' => false,
                 ],
             ],
             'responseClass' => Response\ResourceResponse::class,
@@ -51,26 +44,26 @@ return [
                 'throw_exception_when_not_found' => false,
             ],
         ],
-        'updateStore' => [
-            'httpMethod' => 'PATCH',
-            'uri' => 'stores/{store_id}',
-            'summary' => 'Update an store',
-            'parameters' => [
-                'store_id' => [
-                    'description' => 'The ID of the store to update',
-                    'location' => 'uri',
-                    'type' => 'string',
-                    'required' => true,
-                ],
-            ],
-            'additionalParameters' => [
-                'location' => 'json',
-            ],
-            'responseClass' => Response\ResourceResponse::class,
-            'data' => [
-                'throw_exception_when_not_found' => false,
-            ],
-        ],
+        //'updateStore' => [
+        //    'httpMethod' => 'PATCH',
+        //    'uri' => 'stores/{store_id}',
+        //    'summary' => 'Update an store',
+        //    'parameters' => [
+        //        'store_id' => [
+        //            'description' => 'The ID of the store to update',
+        //            'location' => 'uri',
+        //            'type' => 'string',
+        //            'required' => true,
+        //        ],
+        //    ],
+        //    'additionalParameters' => [
+        //        'location' => 'json',
+        //    ],
+        //    'responseClass' => Response\ResourceResponse::class,
+        //    'data' => [
+        //        'throw_exception_when_not_found' => false,
+        //    ],
+        //],
         // Store Channels
         'listStoreChannels' => [
             'httpMethod' => 'GET',
@@ -115,6 +108,94 @@ return [
             'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'store_services',
         ],
+        // Store Flyers
+        'listStoreFlyers' => [
+            'httpMethod' => 'GET',
+            'uri' => 'store-flyers',
+            'summary' => 'List store flyers',
+            'parameters' => [
+                'page' => [
+                    '$ref' => 'PageParam',
+                ],
+                'page_size' => [
+                    '$ref' => 'PageSizeParam',
+                ],
+                'filter' => [
+                    '$ref' => 'FilterParam',
+                ],
+                'sort' => [
+                    '$ref' => 'SortParam',
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'flyers',
+        ],
+        'fetchStoreFlyer' => [
+            'httpMethod' => 'GET',
+            'uri' => 'store-flyers/{flyer_id}',
+            'summary' => 'Fetch a store flyer',
+            'parameters' => [
+                'flyer_id' => [
+                    'description' => 'The ID of the flyer to fetch',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
+        ],
+        'updateStoreFlyer' => [
+            'httpMethod' => 'PATCH',
+            'uri' => 'store-flyers/{flyer_id}',
+            'summary' => 'Update a store flyer',
+            'parameters' => [
+                'flyer_id' => [
+                    'description' => 'The ID of the flyer to update',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+            ],
+            'additionalParameters' => [
+                'location' => 'json',
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
+        ],
+        //'createStoreFlyer' => [
+        //    'httpMethod' => 'POST',
+        //    'uri' => 'store-flyers',
+        //    'summary' => 'Create a store flyer',
+        //    'parameters' => [
+        //        /** @todo Define params properly and remove "additionalParameters" as catch-all... */
+        //    ],
+        //    'additionalParameters' => [
+        //        'location' => 'json',
+        //    ],
+        //    'responseClass' => Response\ResourceResponse::class,
+        //],
+        //'deleteStoreFlyer' => [
+        //    'httpMethod' => 'DELETE',
+        //    'uri' => 'store-flyers/{flyer_id}',
+        //    'summary' => 'Delete a store flyer',
+        //    'parameters' => [
+        //        'flyer_id' => [
+        //            'description' => 'The ID of the flyer to delete',
+        //            'location' => 'uri',
+        //            'type' => 'string',
+        //            'required' => true,
+        //        ],
+        //    ],
+        //    'additionalParameters' => [
+        //        'location' => 'json',
+        //    ],
+        //    'responseClass' => Response\ResourceResponse::class, // Is an empty response
+        //],
     ],
     'models' => [
         'PageParam' => [
