@@ -91,6 +91,9 @@ return [
                 ],
                 'quantity' => [
                     'description' => 'Quantity (for texts and price)',
+                    // Undocumented feature:
+                    //   When the quantity is negative, the positive value is for prices, but default texts have to be returned.
+                    //   Ref [CR-210823](https://3.basecamp.com/3648441/buckets/7231296/todos/4077892797)
                     'location' => 'query',
                     'required' => false,
                     'type' => 'integer',
