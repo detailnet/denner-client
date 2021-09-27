@@ -11,6 +11,7 @@ use Denner\Client\Response;
  * @method Response\ResourceResponse|null fetchAdvertisedArticle(array $params = [])
  * @method Response\ResourceResponse|null updateAdvertisedArticle(array $params = [])
  * @method Response\ResourceResponse|null fetchArticle(array $params = [])
+ * @method Response\ResourceResponse|null fetchAdHocArticle(array $params = [])
  * @method Response\ListResponse listLanguages(array $params = [])
  * @method Response\ListResponse listPromotions(array $params = [])
  */

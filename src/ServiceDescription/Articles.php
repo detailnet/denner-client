@@ -127,6 +127,31 @@ return [
                 'throw_exception_when_not_found' => false,
             ],
         ],
+        // Ad-hoc articles
+        'fetchAdHocArticle' => [
+            'httpMethod' => 'GET',
+            'uri' => 'ad-hoc-articles/{ad_hoc_article_id}',
+            'summary' => 'Fetch an article',
+            'parameters' => [
+                'ad_hoc_article_id' => [
+                    'description' => 'The ID of the ad-hoc-article to fetch',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+                'broadcast_actions' => [
+                    'description' => 'Request for broadcast',
+                    'location' => 'header',
+                    'sentAs' => 'X-Denner-Broadcast',
+                    'type' => 'string',
+                    'required' => false,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
+        ],
         // Languages
         'listLanguages' => [
             'httpMethod' => 'GET',
