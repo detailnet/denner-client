@@ -11,6 +11,7 @@ use Denner\Client\Response;
  * @method Response\ResourceResponse|null fetchAdvertisedArticle(array $params = [])
  * @method Response\ResourceResponse|null updateAdvertisedArticle(array $params = [])
  * @method Response\ResourceResponse|null fetchArticle(array $params = [])
+ * @method Response\ListResponse listAdHocArticles(array $params = [])
  * @method Response\ResourceResponse|null fetchAdHocArticle(array $params = [])
  * @method Response\ListResponse listLanguages(array $params = [])
  * @method Response\ListResponse listPromotions(array $params = [])
@@ -103,5 +104,18 @@ class ArticlesClient extends DennerClient
         );
 
         return $results->getResourceCount() === 1 ? $results->getResources()[0] : null;
+    }
+
+    public function listAdHocArticlesByWeek(int $year, int $week, array $params = []): Response\ListResponse
+    {
+        $filters = [
+            'year' => ['property' => 'year', 'value' => $year, 'operator' => '=', 'type' => 'integer'],
+            'week' => ['property' => 'week', 'value' => $week, 'operator' => '=', 'type' => 'integer'],
+        ];
+
+        // We may need to replace an already existing filter
+        $this->addOrReplaceFilters($filters, $params);
+
+        return $this->listAdHocArticles($params);
     }
 }

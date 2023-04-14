@@ -128,6 +128,27 @@ return [
             ],
         ],
         // Ad-hoc articles
+        'listAdHocArticles' => [
+            'httpMethod' => 'GET',
+            'uri' => 'ad-hoc-articles',
+            'summary' => 'List ad-hoc articles',
+            'parameters' => [
+                'page' => [
+                    '$ref' => 'PageParam',
+                ],
+                'page_size' => [
+                    '$ref' => 'PageSizeParam',
+                ],
+                'filter' => [
+                    '$ref' => 'FilterParam',
+                ],
+                'sort' => [
+                    '$ref' => 'SortParam',
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'ad_hoc_articles',
+        ],
         'fetchAdHocArticle' => [
             'httpMethod' => 'GET',
             'uri' => 'ad-hoc-articles/{ad_hoc_article_id}',
