@@ -11,12 +11,9 @@ use GuzzleHttp\Psr7\Response as PsrResponse;
 
 class Deserializer
 {
-    protected ServiceDescription $description;
-
-    public function __construct(ServiceDescription $description)
-    {
-        $this->description = $description;
-    }
+    public function __construct(
+        protected ServiceDescription $description
+    ) { }
 
     public function __invoke(PsrResponse $response, PsrRequest $request, CommandInterface $command): ?Response
     {

@@ -20,13 +20,17 @@ use function strtolower;
 abstract class DennerClient extends ServiceClient implements
     Client
 {
-    const CLIENT_VERSION = '4.1.0';
+    const CLIENT_VERSION = '5.0.0';
 
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
 
     const HEADER_APP_ID  = 'App-ID';
     const HEADER_APP_KEY = 'App-Key';
+
+    private string $serviceUrl;
+    private ?string $serviceAppId;
+    private ?string $serviceAppKey;
 
     public static function factory(array $options = []): DennerClient
     {
@@ -88,24 +92,28 @@ abstract class DennerClient extends ServiceClient implements
 
         $description = new ServiceDescription(require $serviceDescriptionFile);
         $deserializer = new Deserializer($description);
+
         $client = new static($httpClient, $description, null, $deserializer);
+        $client->serviceUrl = $config['base_uri'] ?? $defaultOptions['base_uri'];
+        $client->serviceAppId =$config['headers'][self::HEADER_APP_ID] ?? null;
+        $client->serviceAppKey =$config['headers'][self::HEADER_APP_KEY] ?? null;
 
         return $client;
     }
 
     public function getServiceAppId(): ?string
     {
-        return $this->getHeaderOption(self::HEADER_APP_ID);
+        return $this->serviceAppId;
     }
 
     public function getServiceAppKey(): ?string
     {
-        return $this->getHeaderOption(self::HEADER_APP_KEY);
+        return $this->serviceAppKey;
     }
 
     public function getServiceUrl(): string
     {
-        return $this->getHttpClient()->getConfig('base_uri');
+        return $this->serviceUrl;
     }
 
     protected function addOrReplaceFilters(array $filtersToAdd, array &$params): void
@@ -155,12 +163,5 @@ abstract class DennerClient extends ServiceClient implements
     private static function getServiceDescriptionName(): string
     {
         return self::getServiceName(false);
-    }
-
-    private function getHeaderOption(string $option): ?string
-    {
-        $headers = $this->getHttpClient()->getConfig('headers');
-
-        return array_key_exists($option, $headers) ? $headers[$option] : null;
     }
 }

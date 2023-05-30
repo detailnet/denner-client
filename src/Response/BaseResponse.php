@@ -11,18 +11,15 @@ use function sprintf;
 abstract class BaseResponse implements
     Response
 {
-    protected PsrResponse $response;
     protected array $data = [];
-    /** @var array<string, mixed> */
-    private array $options = [];
 
     /**
      * @param array<string, mixed> $options
      */
-    public function __construct(PsrResponse $response, array $options = [])
-    {
-        $this->response = $response;
-        $this->options = $options;
+    public function __construct(
+        protected PsrResponse $response,
+        private array $options = []
+    ) {
         $this->data = $this->extractData();
     }
 
@@ -31,11 +28,7 @@ abstract class BaseResponse implements
         return $this->response;
     }
 
-    /**
-     * @param mixed|null $defaultValue
-     * @return mixed
-     */
-    public function getOption(string $key, $defaultValue = null)
+    public function getOption(string $key, mixed $defaultValue = null): mixed
     {
         return $this->options[$key] ?? $defaultValue;
     }
@@ -65,6 +58,6 @@ abstract class BaseResponse implements
 
     private function decodeJson(string $value): array
     {
-        return json_decode($value, true, 512, JSON_THROW_ON_ERROR);
+        return json_decode($value, true, 512, JSON_THROW_ON_ERROR); // @phpstan-ignore-line With associative:true ant throw-errors option, an array is always returned
     }
 }
