@@ -8,7 +8,7 @@ return [
         'getToken' => [
             //'tag' => 'integrationAdminTokenServiceV1',
             'httpMethod' => 'POST',
-            'uri' => 'V1/integration/admin/token',
+            'uri' => 'V1/integration/admin2/token',
             'summary' => 'Create access token for admin given the admin credentials.',
             'parameters' => [
                 'username' => [
