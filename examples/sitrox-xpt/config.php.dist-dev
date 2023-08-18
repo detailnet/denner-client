@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'base_uri' => 'https://denner-xpt-core-preprod-stage.000.ch/',
+    'client_id' => 'your-username',
+    'client_secret' => 'your-password',
+];
