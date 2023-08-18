@@ -9,7 +9,6 @@ use function array_flip;
 use function assert;
 use function base64_encode;
 use function sprintf;
-use function var_dump;
 
 /**
  * Sitrox XPT API client.
@@ -36,10 +35,11 @@ class SitroxXptClient extends DennerClient
             }
         }
 
+        // Create client without client options
         $client = parent::factory(array_diff_key($options, array_flip([self::OPTION_CLIENT_ID, self::OPTION_CLIENT_SECRET])));
         assert($client instanceof SitroxXptClient);
 
-        // Need to get token using 2-legged OAuth 2.0: refs:
+        // Need to get token using 2-legged OAuth 2.0, refs:
         // - https://stackoverflow.com/questions/14250383/how-does-2-legged-oauth-work-in-oauth-2-0
         // - https://developer.orange.com/tech_guide/2-legged-oauth-flow-step-by-step/
         $tokenResponse = $client->getToken([
@@ -54,8 +54,8 @@ class SitroxXptClient extends DennerClient
         //    ["refresh_token"]=> string(512) "...."
         //    ["scope"]=> string(3) "dag"
         //}
-        // @todo Could save whole response and specially the refresh_token and expires_in,
-        //       but in the context of this client is not needed, we have no long-running daemons/workers that access this API.
+        /** @todo Could save whole response and specially the refresh_token and expires_in,
+                  but in the context of this client is not needed, we have no long-running daemons/workers that access this API. */
 
         // Private access is permitted because we are in same class
         $client->authorizationString = 'Bearer ' . $tokenResponse->getResource()->get('access_token');
@@ -65,6 +65,7 @@ class SitroxXptClient extends DennerClient
 
     public function getAuthorizationString(): string
     {
+        /** @todo Could perform $this->getToken here, instead on factory, change if we need to handle the expiration */
         return $this->authorizationString;
     }
 }
