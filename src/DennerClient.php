@@ -22,6 +22,7 @@ abstract class DennerClient extends ServiceClient implements
 {
     const CLIENT_VERSION = '5.0.0';
 
+    const OPTION_BASE_URI = 'base_uri';
     const OPTION_APP_ID  = 'app_id';
     const OPTION_APP_KEY = 'app_key';
 
