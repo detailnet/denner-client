@@ -7,7 +7,7 @@ use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\HandlerStack;
 
 /**
- * This interface is to to enforce the constructor signature and a safe call of new static(...) on class extensions
+ * This interface is to enforce the constructor signature and a safe call of new static(...) on class extensions
  * ref: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static
  */
 interface Client
