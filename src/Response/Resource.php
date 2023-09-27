@@ -5,35 +5,27 @@ namespace Denner\Client\Response;
 use ArrayAccess;
 use Denner\Client\Exception;
 use JmesPath\Env as JmesPath;
+use function assert;
+use function is_string;
 
 class Resource implements
     ArrayAccess
 {
-    protected array $data = [];
-
-    public function __construct(array $data)
-    {
-        $this->data = $data;
-    }
+    public function __construct(
+        protected array $data = []
+    ) { }
 
     public function has(string $key): bool
     {
         return $this->get($key) !== null;
     }
 
-    /**
-     * @param mixed $default
-     * @return mixed
-     */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
-        return isset($this->data[$key]) ? $this->data[$key] : $default;
+        return $this->data[$key] ?? $default;
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function search(string $expression)
+    public function search(string $expression): mixed
     {
         return JmesPath::search($expression, $this->data);
     }
@@ -60,40 +52,33 @@ expressions on the result data using the search() method.
 EOT;
     }
 
-    /**
-     * @param mixed $offset
-     * @return mixed|null
-     */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
+        assert(is_string($offset));
+
         return $this->get($offset);
     }
 
-    /**
-     * @param mixed $offset
-     * @param mixed $value
-     */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
+        assert(is_string($offset));
+
         throw new Exception\RuntimeException(
             sprintf('Resource is read-only; cannot set "%s"', $offset)
         );
     }
 
-    /**
-     * @param mixed $offset
-     * @return bool
-     */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
+        assert(is_string($offset));
+
         return $this->has($offset);
     }
 
-    /**
-     * @param mixed $offset
-     */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
+        assert(is_string($offset));
+
         throw new Exception\RuntimeException(
             sprintf('Resource is read-only; cannot unset "%s"', $offset)
         );

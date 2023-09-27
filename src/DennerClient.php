@@ -7,9 +7,9 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Command\Guzzle\Description as ServiceDescription;
 use GuzzleHttp\Command\Guzzle\GuzzleClient as ServiceClient;
 use ReflectionClass;
-use function array_key_exists;
 use function array_replace_recursive;
 use function array_values;
+use function assert;
 use function is_array;
 use function ltrim;
 use function preg_replace;
@@ -20,13 +20,13 @@ use function strtolower;
 abstract class DennerClient extends ServiceClient implements
     Client
 {
-    const CLIENT_VERSION = '4.5.0';
+    const CLIENT_VERSION = '5.0.0';
 
     const OPTION_BASE_URI = 'base_uri';
-    const OPTION_APP_ID  = 'app_id';
+    const OPTION_APP_ID = 'app_id';
     const OPTION_APP_KEY = 'app_key';
 
-    const HEADER_APP_ID  = 'App-ID';
+    const HEADER_APP_ID = 'App-ID';
     const HEADER_APP_KEY = 'App-Key';
 
     private string $serviceUrl;
@@ -96,8 +96,8 @@ abstract class DennerClient extends ServiceClient implements
 
         $client = new static($httpClient, $description, null, $deserializer);
         $client->serviceUrl = $config['base_uri'] ?? $defaultOptions['base_uri'];
-        $client->serviceAppId =$config['headers'][self::HEADER_APP_ID] ?? null;
-        $client->serviceAppKey =$config['headers'][self::HEADER_APP_KEY] ?? null;
+        $client->serviceAppId = $config['headers'][self::HEADER_APP_ID] ?? null;
+        $client->serviceAppKey = $config['headers'][self::HEADER_APP_KEY] ?? null;
 
         return $client;
     }
@@ -114,6 +114,8 @@ abstract class DennerClient extends ServiceClient implements
 
     public function getServiceUrl(): string
     {
+        assert(isset($this->serviceUrl));
+
         return $this->serviceUrl;
     }
 
