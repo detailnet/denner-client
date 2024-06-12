@@ -17,6 +17,7 @@ use function sprintf;
  * @method Response\ResourceResponse getToken(array $params = [])
  * @method Response\ResourceResponse listMagazineWeeks(array $params = [])
  * @method Response\ResourceResponse getMagazine(array $params = [])
+ * @method Response\ResourceResponse getEvents(array $params = [])
  */
 class SitroxXptClient extends DennerClient
 {

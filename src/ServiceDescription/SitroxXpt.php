@@ -65,7 +65,25 @@ return [
                 ],
             ],
             'responseClass' => Response\ResourceResponse::class,
-        ]
+        ],
+        'getEvents' => [
+            'httpMethod' => 'GET',
+            'uri' => 'api/dag/v1/events',
+            'summary' => 'Get events.',
+            'parameters' => [
+                'Authorization' => [
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+                'year_week' => [
+                    'location' => 'query',
+                    'type' => 'number',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+        ],
     ],
     'models' => [
     ],
