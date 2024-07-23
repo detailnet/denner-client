@@ -6,7 +6,7 @@ $config = require realpath(__DIR__ . '/../bootstrap.php');
 
 $client = SitroxXptClient::factory($config);
 
-$response = $client->getEvents(
+$response = $client->listEvents(
     [
         'Authorization' => $client->getAuthorizationString(),
         'year_week' => @$_GET['year_week'] ?: 202430,
@@ -14,4 +14,4 @@ $response = $client->getEvents(
 );
 
 echo "<pre>";
-print_r($response->getResource());
+var_dump(iterator_to_array($response->getIterator()));

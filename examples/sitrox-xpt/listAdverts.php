@@ -14,5 +14,4 @@ $response = $client->getAdverts(
 );
 
 echo "<pre>";
-
 var_dump(iterator_to_array($response->getIterator()));

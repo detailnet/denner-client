@@ -18,8 +18,9 @@ use function sprintf;
  * @method Response\ResourceResponse listMagazineWeeks(array $params = [])
  * @method Response\ResourceResponse getMagazine(array $params = [])
  * @method Response\ResourceResponse getEvents(array $params = [])
+ * @method Response\ListResponse listEvents(array $params = [])
  * @method Response\ResourceResponse getAdvert(array $params = [])
- * @method Response\ListResponse getAdverts(array $params = [])
+ * @method Response\ListResponse listAdverts(array $params = [])
  */
 class SitroxXptClient extends DennerClient
 {

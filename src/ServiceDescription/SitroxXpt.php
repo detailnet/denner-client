@@ -84,6 +84,25 @@ return [
             ],
             'responseClass' => Response\ResourceResponse::class,
         ],
+        'listEvents' => [
+            'httpMethod' => 'GET',
+            'uri' => 'api/dag/v1/events',
+            'summary' => 'List events.',
+            'parameters' => [
+                'Authorization' => [
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+                'year_week' => [
+                    'location' => 'query',
+                    'type' => 'number',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'events',
+        ],
         'getAdvert' => [
             'httpMethod' => 'GET',
             'uri' => 'api/dag/v1/adverts',
@@ -103,7 +122,7 @@ return [
             'responseClass' => Response\ResourceResponse::class,
         ],
         // Alternative, fetch pages as listing
-        'getAdverts' => [
+        'listAdverts' => [
             'httpMethod' => 'GET',
             'uri' => 'api/dag/v1/adverts',
             'summary' => 'Get adverts.',
