@@ -84,6 +84,44 @@ return [
             ],
             'responseClass' => Response\ResourceResponse::class,
         ],
+        'getAdvert' => [
+            'httpMethod' => 'GET',
+            'uri' => 'api/dag/v1/adverts',
+            'summary' => 'Get adverts.',
+            'parameters' => [
+                'Authorization' => [
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+                'year_week' => [
+                    'location' => 'query',
+                    'type' => 'number',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+        ],
+        // Alternative, fetch pages as listing
+        'getAdverts' => [
+            'httpMethod' => 'GET',
+            'uri' => 'api/dag/v1/adverts',
+            'summary' => 'Get adverts.',
+            'parameters' => [
+                'Authorization' => [
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+                'year_week' => [
+                    'location' => 'query',
+                    'type' => 'number',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'pages',
+        ],
     ],
     'models' => [
     ],

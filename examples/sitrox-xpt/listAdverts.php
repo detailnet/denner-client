@@ -6,7 +6,7 @@ $config = require realpath(__DIR__ . '/../bootstrap.php');
 
 $client = SitroxXptClient::factory($config);
 
-$response = $client->getMagazine(
+$response = $client->getAdverts(
     [
         'Authorization' => $client->getAuthorizationString(),
         'year_week' => @$_GET['year_week'] ?: 202428,
@@ -14,4 +14,5 @@ $response = $client->getMagazine(
 );
 
 echo "<pre>";
-print_r($response->getResource());
+
+var_dump(iterator_to_array($response->getIterator()));

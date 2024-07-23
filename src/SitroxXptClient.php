@@ -18,11 +18,31 @@ use function sprintf;
  * @method Response\ResourceResponse listMagazineWeeks(array $params = [])
  * @method Response\ResourceResponse getMagazine(array $params = [])
  * @method Response\ResourceResponse getEvents(array $params = [])
+ * @method Response\ResourceResponse getAdvert(array $params = [])
+ * @method Response\ListResponse getAdverts(array $params = [])
  */
 class SitroxXptClient extends DennerClient
 {
     const OPTION_CLIENT_ID = self::OPTION_APP_ID;
     const OPTION_CLIENT_SECRET = self::OPTION_APP_KEY;
+
+    public const PUBLICATION_STATUS_OPEN = 'global_editable'; // In Bearbeitung
+    public const PUBLICATION_STATUS_OPEN_FG_ONLY = 'fg_editable'; // Neuerstellung
+    public const PUBLICATION_STATUS_READY = 'finished'; // Abgeschlossen
+
+    public const MAGAZINE_STATUSES = [
+        self::PUBLICATION_STATUS_OPEN,
+        self::PUBLICATION_STATUS_OPEN_FG_ONLY,
+        self::PUBLICATION_STATUS_READY,
+    ];
+
+    public const EVENT_TYPE_MANUAL = 'manual_promotion';
+    public const EVENT_TYPE_PRODUCT_LISTING = 'product_listing_promotion';
+    public const EVENT_TYPE_FEATURE = 'feature_promotion';
+
+    public const IGNORE_EVENT_TYPES = [
+        self::EVENT_TYPE_MANUAL,
+    ];
 
     private string $clientId;
     private string $clientSecret;
