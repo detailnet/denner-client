@@ -21,6 +21,7 @@ use function sprintf;
  * @method Response\ListResponse listEvents(array $params = [])
  * @method Response\ResourceResponse getAdvert(array $params = [])
  * @method Response\ListResponse listAdverts(array $params = [])
+ * @method Response\ListResponse listFeaturedArticles(array $params = [])
  */
 class SitroxXptClient extends DennerClient
 {

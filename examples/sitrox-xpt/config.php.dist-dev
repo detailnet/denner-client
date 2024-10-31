@@ -1,7 +1,15 @@
 <?php
 
+use Denner\Client\SitroxXptClient;
+
 return [
-    'base_uri' => 'https://denner-xpt-core-preprod-stage.000.ch/',
-    'app_id' => 'sitrox-xpt-client-id',
-    'app_key' => 'sitrox-xpt-client-secret',
+    SitroxXptClient::OPTION_BASE_URI => 'https://denner-xpt-core-preprod-stage.000.ch/',
+    SitroxXptClient::OPTION_CLIENT_ID => 'sitrox-xpt-client-id',
+    SitroxXptClient::OPTION_CLIENT_SECRET => 'sitrox-xpt-client-secret',
+
+    // If not in Detail AG main network (or on allowed servers - aws test and prod)
+    // 1. Start VPN connection to Detail AG
+    // 2. Start proxy tunnel through "aquarium server": `ssh -v -N -D 12345 sshproxy@192.168.111.249` pass in 1Pass
+    // 3. Enable proxy code above
+    // 'proxy' => 'socks5h://' . (getenv()['LANDO_HOST_IP'] ?? 'localhost') . ':12345',
 ];

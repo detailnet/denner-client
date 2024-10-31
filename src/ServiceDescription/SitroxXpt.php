@@ -141,6 +141,25 @@ return [
             'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'pages',
         ],
+        'listFeaturedArticles' => [
+            'httpMethod' => 'GET',
+            'uri' => 'api/dag/v1/featured_articles',
+            'summary' => 'List featured articles.',
+            'parameters' => [
+                'Authorization' => [
+                    'location' => 'header',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+                'year_week' => [
+                    'location' => 'query',
+                    'type' => 'number',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'promotions',
+        ],
     ],
     'models' => [
     ],
