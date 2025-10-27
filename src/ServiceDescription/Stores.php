@@ -23,6 +23,12 @@ return [
                 'sort' => [
                     '$ref' => 'SortParam',
                 ],
+                'view-as' => [ // To use in Atlas transition
+                    'description' => 'Different serialization view',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ]
             ],
             'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'stores',
