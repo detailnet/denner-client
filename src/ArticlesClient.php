@@ -15,6 +15,12 @@ use Denner\Client\Response;
  * @method Response\ResourceResponse|null fetchAdHocArticle(array $params = [])
  * @method Response\ListResponse listLanguages(array $params = [])
  * @method Response\ListResponse listPromotions(array $params = [])
+ * @method Response\ListResponse listXptEvents(array $params = [])
+ * @method Response\ResourceResponse|null fetchXptEvent(array $params = [])
+ * @method Response\ListResponse listXptFeaturedArticles(array $params = [])
+ * @method Response\ResourceResponse|null fetchXptFeaturedArticle(array $params = [])
+ * @method Response\ListResponse listXptPublications(array $params = [])
+ * @method Response\ResourceResponse|null fetchXptPublication(array $params = [])
  */
 class ArticlesClient extends DennerClient
 {

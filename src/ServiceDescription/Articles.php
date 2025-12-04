@@ -218,6 +218,120 @@ return [
             'responseClass' => Response\ListResponse::class,
             'responseDataRoot' => 'promotions',
         ],
+        'listXptEvents' => [
+            'httpMethod' => 'GET',
+            'uri' => 'xpt-events',
+            'summary' => 'List XPT events',
+            'parameters' => [
+                'page' => [
+                    '$ref' => 'PageParam',
+                ],
+                'page_size' => [
+                    '$ref' => 'PageSizeParam',
+                ],
+                'filter' => [
+                    '$ref' => 'FilterParam',
+                ],
+                'sort' => [
+                    '$ref' => 'SortParam',
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'xpt_events',
+        ],
+        'fetchXptEvent' => [
+            'httpMethod' => 'GET',
+            'uri' => 'xpt-events/{xpt_event_id}',
+            'summary' => 'Fetch an XPT event',
+            'parameters' => [
+                'ad_hoc_article_id' => [
+                    'description' => 'The ID of the XPT event to fetch',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
+        ],
+        'listXptFeaturedArticles' => [
+            'httpMethod' => 'GET',
+            'uri' => 'xpt-featured-articles',
+            'summary' => 'List XPT featuredArticles',
+            'parameters' => [
+                'page' => [
+                    '$ref' => 'PageParam',
+                ],
+                'page_size' => [
+                    '$ref' => 'PageSizeParam',
+                ],
+                'filter' => [
+                    '$ref' => 'FilterParam',
+                ],
+                'sort' => [
+                    '$ref' => 'SortParam',
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'xpt_featuredArticles',
+        ],
+        'fetchXptFeaturedArticle' => [
+            'httpMethod' => 'GET',
+            'uri' => 'xpt-featured-articles/{xpt_featuredArticle_id}',
+            'summary' => 'Fetch an XPT featured-article',
+            'parameters' => [
+                'ad_hoc_article_id' => [
+                    'description' => 'The ID of the XPT featured-article to fetch',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
+        ],
+        'listXptPublications' => [
+            'httpMethod' => 'GET',
+            'uri' => 'xpt-publications',
+            'summary' => 'List XPT publications',
+            'parameters' => [
+                'page' => [
+                    '$ref' => 'PageParam',
+                ],
+                'page_size' => [
+                    '$ref' => 'PageSizeParam',
+                ],
+                'filter' => [
+                    '$ref' => 'FilterParam',
+                ],
+                'sort' => [
+                    '$ref' => 'SortParam',
+                ],
+            ],
+            'responseClass' => Response\ListResponse::class,
+            'responseDataRoot' => 'xpt_publications',
+        ],
+        'fetchXptPublication' => [
+            'httpMethod' => 'GET',
+            'uri' => 'xpt-publications/{xpt_publication_id}',
+            'summary' => 'Fetch an XPT publication',
+            'parameters' => [
+                'ad_hoc_article_id' => [
+                    'description' => 'The ID of the XPT publication to fetch',
+                    'location' => 'uri',
+                    'type' => 'string',
+                    'required' => true,
+                ],
+            ],
+            'responseClass' => Response\ResourceResponse::class,
+            'data' => [
+                'throw_exception_when_not_found' => false,
+            ],
+        ],
     ],
     'models' => [
         'PageParam' => [

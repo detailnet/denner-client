@@ -1,5 +1,7 @@
 <?php
 
+use Denner\Client\ArticlesClient;
+
 return [
-    'base_uri' => 'http://denner-articles.detailnet.me/api/'
+    ArticlesClient::OPTION_BASE_URI => 'http://denner-articles.detailnet.me/api/'
 ];
