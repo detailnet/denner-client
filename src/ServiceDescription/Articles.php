@@ -244,11 +244,17 @@ return [
             'uri' => 'xpt-events/{xpt_event_id}',
             'summary' => 'Fetch an XPT event',
             'parameters' => [
-                'ad_hoc_article_id' => [
+                'xpt_event_id' => [
                     'description' => 'The ID of the XPT event to fetch',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
+                ],
+                'compare' => [
+                    'description' => 'Atlas info difference to specific offset',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
                 ],
             ],
             'responseClass' => Response\ResourceResponse::class,
@@ -279,14 +285,20 @@ return [
         ],
         'fetchXptFeaturedArticle' => [
             'httpMethod' => 'GET',
-            'uri' => 'xpt-featured-articles/{xpt_featuredArticle_id}',
+            'uri' => 'xpt-featured-articles/{xpt_featured_article_id}',
             'summary' => 'Fetch an XPT featured-article',
             'parameters' => [
-                'ad_hoc_article_id' => [
+                'xpt_featured_article_id' => [
                     'description' => 'The ID of the XPT featured-article to fetch',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
+                ],
+                'compare' => [
+                    'description' => 'Atlas info difference to specific offset',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
                 ],
             ],
             'responseClass' => Response\ResourceResponse::class,
@@ -320,11 +332,17 @@ return [
             'uri' => 'xpt-publications/{xpt_publication_id}',
             'summary' => 'Fetch an XPT publication',
             'parameters' => [
-                'ad_hoc_article_id' => [
+                'xpt_publication_id' => [
                     'description' => 'The ID of the XPT publication to fetch',
                     'location' => 'uri',
                     'type' => 'string',
                     'required' => true,
+                ],
+                'compare' => [
+                    'description' => 'Atlas info difference to specific offset',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
                 ],
             ],
             'responseClass' => Response\ResourceResponse::class,

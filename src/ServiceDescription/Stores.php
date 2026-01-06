@@ -44,6 +44,18 @@ return [
                     'type' => 'string',
                     'required' => true,
                 ],
+                'compare-branch' => [
+                    'description' => 'Atlas info branch difference to specific offset',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ],
+                'compare-openings' => [
+                    'description' => 'Atlas info branch opening times difference to specific offset',
+                    'location' => 'query',
+                    'type' => 'string',
+                    'required' => false,
+                ],
             ],
             'responseClass' => Response\ResourceResponse::class,
             'data' => [
