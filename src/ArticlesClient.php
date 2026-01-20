@@ -80,7 +80,7 @@ class ArticlesClient extends DennerClient
     }
 
     public function getAdvertisedArticleByArticleSelection(
-        string $promotionCode,
+        string $promotionId,
         string $articleId,
         int $quantity
     ): ?Response\Resource {
@@ -88,8 +88,8 @@ class ArticlesClient extends DennerClient
             [
                 'filter' => [
                     [
-                        'property' => 'promotion.code',
-                        'value' => $promotionCode,
+                        'property' => 'promotion',
+                        'value' => $promotionId,
                         'operator' => '=',
                         'type' => 'string',
                     ],
